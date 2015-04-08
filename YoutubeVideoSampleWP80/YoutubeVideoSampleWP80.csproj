@@ -137,6 +137,7 @@
     <Content Include="Assets\Icons\rating.png" />
     <Content Include="Assets\Icons\viewCount.png" />
     <Content Include="Assets\Images\back.png" />
+    <Content Include="Assets\Images\bg.jpg" />
     <Content Include="Assets\Images\feature.search.png" />
     <Content Include="Assets\Images\next.png" />
     <Content Include="Assets\Icons\Next.png" />

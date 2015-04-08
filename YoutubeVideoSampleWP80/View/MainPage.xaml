@@ -18,12 +18,12 @@
         <conv:AlternateRowColour x:Key="RowColour" />
 
         <DataTemplate x:Key="VideoDataTemplate">
-            <Grid Background="{Binding Converter={StaticResource RowColour}}" Margin="0,5,0,0">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="430">
-                    <Image Source="{Binding Thumbnail}" Margin="0" Stretch="Fill" Height="90" MaxWidth="150" HorizontalAlignment="Left" Width="150"/>
-                    <StackPanel VerticalAlignment="Center" Margin="10,10,10,10" HorizontalAlignment="Left" Width="220">
-                        <TextBlock FontSize="20" x:Name="Title" Margin="5" Foreground="Black" Text="{Binding Title}" TextAlignment="Center" TextWrapping="Wrap" Height="58" HorizontalAlignment="Center" />
-                        <TextBlock x:Name="PubDate" Foreground="Black" Margin="5" Text="{Binding PubDate}" TextAlignment="Center" TextWrapping="Wrap" Height="30" HorizontalAlignment="Center" />
+            <Grid Background="{Binding Converter={StaticResource RowColour}}" Margin="6,12" Height="120">
+                <StackPanel Orientation="Horizontal" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="430">
+                    <Image Source="{Binding Thumbnail}" Margin="0" Stretch="Fill" Height="120" MaxWidth="150" HorizontalAlignment="Left" Width="150"/>
+                    <StackPanel VerticalAlignment="Center" Margin="10" HorizontalAlignment="Left" Width="220">
+                        <TextBlock FontSize="20" x:Name="Title" Margin="5" Foreground="White" Text="{Binding Title}" TextAlignment="Center" TextWrapping="Wrap" Height="58" HorizontalAlignment="Center" />
+                        <TextBlock x:Name="PubDate" Foreground="White" Margin="5" Text="{Binding PubDate}" TextAlignment="Center" TextWrapping="Wrap" Height="30" HorizontalAlignment="Center" />
                     </StackPanel>
                 </StackPanel>
             </Grid>
@@ -31,7 +31,10 @@
     </phone:PhoneApplicationPage.Resources>
 
     <!--Data context is set to sample data above and LayoutRoot contains the root grid where all other page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="../Assets/Images/bg.jpg" AlignmentY="Top" AlignmentX="Center" Opacity="0.3"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -52,7 +55,7 @@
                 <Image Width="50" Height="50" Source="../Assets/Icons/Previous.png" Margin="125,10,281,12" MouseEnter="PreviousClick"/>
 
                 <Image Width="50" Height="50" Source="../Assets/Icons/Next.png" Margin="267,10,139,12" MouseEnter="NextClick"/>
-                <TextBlock  Margin="175,10,189,0" Foreground="Black" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Text="1"  VerticalAlignment="Center" x:Name="CurrentPageXaml" Height="50"/>
+                <TextBlock  Margin="175,10,189,0" Foreground="White" FontSize="24" FontWeight="Light" TextWrapping="Wrap" TextAlignment="Center" Text="1"  VerticalAlignment="Center" x:Name="CurrentPageXaml" Height="50"/>
                 <Image Width="50" Height="50" Source="../Assets/Icons/Search.png" Margin="345,10,61,12" MouseEnter="SearchClick"/>
             </Grid>
         </Grid>

@@ -7,8 +7,8 @@ namespace YoutubeVideoSampleWP80.Converters
     public class AlternateRowColour : IValueConverter
     {
         bool _isAlternate;
-        SolidColorBrush even = new SolidColorBrush(Color.FromArgb(255, 241, 241, 251)); // Set these two brushes to your alternating background colours.
-        SolidColorBrush odd = new SolidColorBrush(Color.FromArgb(255,241,241,251));
+        SolidColorBrush even = new SolidColorBrush(Color.FromArgb(100, 241, 241, 251)); // Set these two brushes to your alternating background colours.
+        SolidColorBrush odd = new SolidColorBrush(Color.FromArgb(100,241,241,251));
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

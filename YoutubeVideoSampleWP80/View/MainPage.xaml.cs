@@ -49,7 +49,7 @@ namespace YoutubeVideoSampleWP80.View
                 }
                 else
                 {
-                    MessageBox.Show("You're not connected to Internet!");
+                    MessageBox.Show("You're not connected to the Internet!");
                 }
             }
             catch (Exception ex)
