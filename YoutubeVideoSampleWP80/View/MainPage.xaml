@@ -1,0 +1,81 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="YoutubeVideoSampleWP80.View.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:conv="clr-namespace:YoutubeVideoSampleWP80.Converters"
+    xmlns:rma="clr-namespace:RateMyApp.Controls;assembly=RateMyApp"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+    <phone:PhoneApplicationPage.Resources>
+        <conv:AlternateRowColour x:Key="RowColour" />
+
+        <DataTemplate x:Key="VideoDataTemplate">
+            <Grid Background="{Binding Converter={StaticResource RowColour}}" Margin="0,5,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="430">
+                    <Image Source="{Binding Thumbnail}" Margin="0" Stretch="Fill" Height="90" MaxWidth="150" HorizontalAlignment="Left" Width="150"/>
+                    <StackPanel VerticalAlignment="Center" Margin="10,10,10,10" HorizontalAlignment="Left" Width="220">
+                        <TextBlock FontSize="20" x:Name="Title" Margin="5" Foreground="Black" Text="{Binding Title}" TextAlignment="Center" TextWrapping="Wrap" Height="58" HorizontalAlignment="Center" />
+                        <TextBlock x:Name="PubDate" Foreground="Black" Margin="5" Text="{Binding PubDate}" TextAlignment="Center" TextWrapping="Wrap" Height="30" HorizontalAlignment="Center" />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
+
+    <!--Data context is set to sample data above and LayoutRoot contains the root grid where all other page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel x:Name="TitlePanel" Orientation="Horizontal" Margin="12,10,0,0">
+            <Image VerticalAlignment="Center" HorizontalAlignment="Left" Source="/larva2.png" Height="90" Width="90"/>
+            <StackPanel Margin="5,20,0,15">
+                <TextBlock x:Name="pageTitle" Text="Larva Cartoon" Foreground="White" Margin="20,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" MaxWidth="320"
+                           FontSize="48" TextTrimming="WordEllipsis" FontWeight="ExtraLight"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!--ContentPanel contains ListBox and ListBox ItemTemplate. Place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <phone:LongListSelector x:Name="ChannelVideos" SelectionChanged="VideosList_SelectionChanged" Visibility="Collapsed" ItemTemplate="{StaticResource VideoDataTemplate}"/>
+            <ProgressBar x:Name="ChannelProgress" Foreground="White" VerticalAlignment="Center" IsIndeterminate="True" />
+            <Grid  Grid.Row="0" Margin="0,520,0,2">
+                <Image Width="50" Height="50" Source="../Assets/Icons/Previous.png" Margin="125,10,281,12" MouseEnter="PreviousClick"/>
+
+                <Image Width="50" Height="50" Source="../Assets/Icons/Next.png" Margin="267,10,139,12" MouseEnter="NextClick"/>
+                <TextBlock  Margin="175,10,189,0" Foreground="Black" FontSize="24" FontWeight="Bold" TextWrapping="Wrap" TextAlignment="Center" Text="1"  VerticalAlignment="Center" x:Name="CurrentPageXaml" Height="50"/>
+                <Image Width="50" Height="50" Source="../Assets/Icons/Search.png" Margin="345,10,61,12" MouseEnter="SearchClick"/>
+            </Grid>
+        </Grid>
+
+        <rma:FeedbackOverlay x:Name="FeedbackOverlay" 
+                             Grid.RowSpan="2" 
+                             FeedbackTo="nvtang.khtn@gmail.com" 
+                             ApplicationName="#Larva Cartoon" 
+                             CompanyName="VTA Media" 
+                             EnableAnimation="False"/>
+    </Grid>
+    
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar Mode="Default">
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/published.png" Text="date" Click="PublishedClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/viewCount.png" Text="views" Click="ViewCountClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/rating.png" Text="likes" Click="RatingClick"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="reload"  Click="ReloadClick"/>
+                <shell:ApplicationBarMenuItem Text="rate and review" Click="RateAndReviewClick"/>
+                <shell:ApplicationBarMenuItem Text="feedback"  Click="FeedbackClick"/>
+                <!--<shell:ApplicationBarMenuItem Text="other apps"/>-->
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>
