@@ -18,20 +18,34 @@
         <conv:AlternateRowColour x:Key="RowColour" />
 
         <DataTemplate x:Key="VideoDataTemplate">
-            <Grid Background="{Binding Converter={StaticResource RowColour}}" Margin="6,12" Height="120">
-                <StackPanel Orientation="Horizontal" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="430">
-                    <Image Source="{Binding Thumbnail}" Margin="0" Stretch="Fill" Height="120" MaxWidth="150" HorizontalAlignment="Left" Width="150"/>
-                    <StackPanel VerticalAlignment="Center" Margin="10" HorizontalAlignment="Left" Width="220">
+            <Grid Margin="0,12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Grid.ColumnSpan="2" Canvas.ZIndex="-1" Background="#000000" Width="Auto" Height="Auto" CornerRadius="6"></Border>
+                <Border Grid.Column="0" Width="Auto" Height="Auto" CornerRadius="6,0,0,6">
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding Thumbnail}" Stretch="UniformToFill"  />
+                    </Border.Background>
+                </Border>
+                <!--Background="{Binding Converter={StaticResource RowColour}}"-->
+                <Border Grid.Column="1" Width="Auto" Height="Auto" CornerRadius="0,6,6,0">
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding BlurBgSource}" Stretch="UniformToFill" Opacity="0.5" />
+                    </Border.Background>
+                    <StackPanel VerticalAlignment="Center" Margin="10" HorizontalAlignment="Left" Width="270">
                         <TextBlock FontSize="20" x:Name="Title" Margin="5" Foreground="White" Text="{Binding Title}" TextAlignment="Center" TextWrapping="Wrap" Height="58" HorizontalAlignment="Center" />
                         <TextBlock x:Name="PubDate" Foreground="White" Margin="5" Text="{Binding PubDate}" TextAlignment="Center" TextWrapping="Wrap" Height="30" HorizontalAlignment="Center" />
                     </StackPanel>
-                </StackPanel>
+                </Border>
             </Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
 
     <!--Data context is set to sample data above and LayoutRoot contains the root grid where all other page content is placed-->
-    <Grid x:Name="LayoutRoot">
+    <Grid x:Name="LayoutRoot" >
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="../Assets/Images/bg.jpg" AlignmentY="Top" AlignmentX="Center" Opacity="0.3"/>
         </Grid.Background>
@@ -39,24 +53,33 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel x:Name="TitlePanel" Orientation="Horizontal" Margin="12,10,0,0">
-            <Image VerticalAlignment="Center" HorizontalAlignment="Left" Source="/larva2.png" Height="90" Width="90"/>
-            <StackPanel Margin="5,20,0,15">
-                <TextBlock x:Name="pageTitle" Text="Larva Cartoon" Foreground="White" Margin="20,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" MaxWidth="320"
-                           FontSize="48" TextTrimming="WordEllipsis" FontWeight="ExtraLight"/>
-            </StackPanel>
-        </StackPanel>
+        <Grid x:Name="TitlePanel" Margin="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Source="/larva2.png" Height="90" Width="90"/>
+            <TextBlock Grid.Column="1" VerticalAlignment="Center" x:Name="PageTitle" Text="Larva Cartoon" Foreground="White"
+                       FontSize="48" FontWeight="ExtraLight" FontFamily="/YoutubeVideoSampleWP80;component/Fonts/Fonts.zip#VNF Cinnamon Cake"/>
+
+        </Grid>
 
         <!--ContentPanel contains ListBox and ListBox ItemTemplate. Place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <phone:LongListSelector x:Name="ChannelVideos" SelectionChanged="VideosList_SelectionChanged" Visibility="Collapsed" ItemTemplate="{StaticResource VideoDataTemplate}"/>
             <ProgressBar x:Name="ChannelProgress" Foreground="White" VerticalAlignment="Center" IsIndeterminate="True" />
-            <Grid  Grid.Row="0" Margin="0,520,0,2">
-                <Image Width="50" Height="50" Source="../Assets/Icons/Previous.png" Margin="125,10,281,12" MouseEnter="PreviousClick"/>
-
-                <Image Width="50" Height="50" Source="../Assets/Icons/Next.png" Margin="267,10,139,12" MouseEnter="NextClick"/>
-                <TextBlock  Margin="175,10,189,0" Foreground="White" FontSize="24" FontWeight="Light" TextWrapping="Wrap" TextAlignment="Center" Text="1"  VerticalAlignment="Center" x:Name="CurrentPageXaml" Height="50"/>
-                <Image Width="50" Height="50" Source="../Assets/Icons/Search.png" Margin="345,10,61,12" MouseEnter="SearchClick"/>
+            <Grid Grid.Row="0" VerticalAlignment="Bottom" Height="60">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="1" Width="50" Height="50" Source="../Assets/Icons/Previous.png" MouseEnter="PreviousClick"/>
+                <TextBlock Grid.Column="2" Padding="0,6,0,0" Foreground="White" FontSize="24" FontWeight="Light" TextWrapping="Wrap" TextAlignment="Center" Text="1"  VerticalAlignment="Center" x:Name="CurrentPageXaml" Height="50"/>
+                <Image Grid.Column="3" Width="50" Height="50" Source="../Assets/Icons/Next.png" MouseEnter="NextClick"/>
+                <Image Grid.Column="4" Width="50" Height="50" Source="../Assets/Icons/Search.png" MouseEnter="SearchClick"/>
             </Grid>
         </Grid>
 
@@ -67,7 +90,7 @@
                              CompanyName="VTA Media" 
                              EnableAnimation="False"/>
     </Grid>
-    
+
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar Mode="Default">
             <shell:ApplicationBarIconButton IconUri="/Assets/Icons/published.png" Text="date" Click="PublishedClick"/>

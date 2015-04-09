@@ -3,20 +3,22 @@ using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Collections.Generic;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Xml.Linq;
 using Coding4Fun.Toolkit.Controls;
-using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
-using Model.YoutubeVideoSampleWP80;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
+using YoutubeVideoSampleWP80.Model;
+using YoutubeVideoSampleWP80.Utilities;
 
 namespace YoutubeVideoSampleWP80.View
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class MainPage
     {
+
         public int Index = 1;
         public int MaxResults = 10;
         public const string YoutubeChannel = "JackyPhanChanel";
@@ -26,11 +28,12 @@ namespace YoutubeVideoSampleWP80.View
         public int TotalPage = 1;
         public int TotalResults;
         public int CurrentPage = 1;
-        public string Query="";
+        public string Query = "";
         public MainPage()
         {
             InitializeComponent();
             FeedbackOverlay.VisibilityChanged += FeedbackOverlay_VisibilityChanged;
+
         }
         void FeedbackOverlay_VisibilityChanged(object sender, EventArgs e)
         {
@@ -45,7 +48,7 @@ namespace YoutubeVideoSampleWP80.View
                 {
                     await GetDataForList();
 
-                    TotalPage = (int)Math.Ceiling((double)TotalResults/MaxResults);
+                    TotalPage = (int)Math.Ceiling((double)TotalResults / MaxResults);
                 }
                 else
                 {
@@ -68,9 +71,9 @@ namespace YoutubeVideoSampleWP80.View
             var channelVideos =
                 await
                     GetYoutubeChannel("http://gdata.youtube.com/feeds/api/users/" + YoutubeChannel +
-                                      "/uploads?alt="+ TypeData +"&v=2&orderby="+ OrderBy +"&start-index=" + Index +
-                                      "&max-results=" + MaxResults + (string.IsNullOrEmpty(Query) ? "" : ("&q=" + Query)) );
-            if(ChannelVideos.ItemsSource != null)
+                                      "/uploads?alt=" + TypeData + "&v=2&orderby=" + OrderBy + "&start-index=" + Index +
+                                      "&max-results=" + MaxResults + (string.IsNullOrEmpty(Query) ? "" : ("&q=" + Query)));
+            if (ChannelVideos.ItemsSource != null)
                 ChannelVideos.ItemsSource.Clear();
             ChannelVideos.ItemsSource = channelVideos;
 
@@ -85,7 +88,7 @@ namespace YoutubeVideoSampleWP80.View
             {
                 var client = new HttpClient();
                 var feedXml = await client.GetStringAsync(new Uri(url));
-                
+
                 var atomns = XNamespace.Get("http://www.w3.org/2005/Atom");
                 var yt = XNamespace.Get("http://gdata.youtube.com/schemas/2007");
                 var openSearch = XNamespace.Get("http://a9.com/-/spec/opensearch/1.1/");
@@ -110,6 +113,18 @@ namespace YoutubeVideoSampleWP80.View
                         ViewCount = (int)item.Element(yt + "statistics").Attribute("viewCount"),
                         Thumbnail = new Uri(mediaGroup.Elements(media + "thumbnail").FirstOrDefault(o => o.Attribute(yt + "name").Value == "mqdefault").Attribute("url").Value)
                     };
+
+                    var img = new BitmapImage(video.Thumbnail) { CreateOptions = BitmapCreateOptions.None };
+                    img.ImageOpened += (s, e) =>
+                    {
+                        if (video.BlurBgSource != null) return;
+
+                        var wb = new WriteableBitmap((BitmapImage)s);
+                        wb.BoxBlur(23);
+                        video.BlurBgSource = wb;
+                        //wb.Invalidate();
+                    };
+
                     var a = video.YoutubeLink.ToString().Remove(0, 31);
                     video.Id = a.Substring(0, 11);
                     videosList.Add(video);
@@ -123,7 +138,7 @@ namespace YoutubeVideoSampleWP80.View
             }
         }
 
-   
+
         //After selecting a video, navigate to the VideoPage
         private void VideosList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
@@ -170,7 +185,7 @@ namespace YoutubeVideoSampleWP80.View
             input.Value = HttpUtility.UrlDecode(Query);
             input.Show();
         }
-         
+
         private async void input_Completed(object sender, PopUpEventArgs<string, PopUpResult> e)
         {
             Index = 1;

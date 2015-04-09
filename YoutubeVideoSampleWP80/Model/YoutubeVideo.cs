@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
-namespace Model.YoutubeVideoSampleWP80
+namespace YoutubeVideoSampleWP80.Model
 {
     public class YoutubeVideo
     {
@@ -18,6 +15,7 @@ namespace Model.YoutubeVideoSampleWP80
         public int Likes { get; set; }
         public int ViewCount { get; set; }
         public TimeSpan Duration { get; set; }
+        public WriteableBitmap BlurBgSource { get; set; }
     }
 
     public enum OrderByType
