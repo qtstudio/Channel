@@ -35,10 +35,21 @@
                     <Border.Background>
                         <ImageBrush ImageSource="{Binding BlurBgSource, Mode=OneWay}" Stretch="UniformToFill" Opacity="0.5" />
                     </Border.Background>
-                    <StackPanel VerticalAlignment="Center" Margin="10" HorizontalAlignment="Left" Width="270">
-                        <TextBlock FontSize="20" x:Name="Title" Margin="5" Foreground="White" Text="{Binding Title}" TextAlignment="Center" TextWrapping="Wrap" Height="58" HorizontalAlignment="Center" />
-                        <TextBlock x:Name="PubDate" Foreground="White" Margin="5" Text="{Binding PubDate}" TextAlignment="Center" TextWrapping="Wrap" Height="30" HorizontalAlignment="Center" />
-                    </StackPanel>
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Foreground="White" Text="{Binding Title}" TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center" />
+                        <TextBlock Grid.Row="1" Grid.Column="0" Foreground="White" Text="{Binding ViewCount}" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Foreground="White" Text="{Binding Likes}" />
+                        <TextBlock Grid.Row="2" Grid.Column="0" Foreground="White" Text="{Binding Duration}" />
+                    </Grid>
                 </Border>
             </Grid>
         </DataTemplate>
