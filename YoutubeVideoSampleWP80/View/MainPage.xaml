@@ -15,7 +15,7 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
     <phone:PhoneApplicationPage.Resources>
-        <conv:AlternateRowColour x:Key="RowColour" />
+        <!--<conv:ImgPathBlurConverter x:Key="ImgPathBlur" />-->
 
         <DataTemplate x:Key="VideoDataTemplate">
             <Grid Margin="0,12">
@@ -27,13 +27,13 @@
                 <Border Grid.Column="0" Grid.ColumnSpan="2" Canvas.ZIndex="-1" Background="#000000" Width="Auto" Height="Auto" CornerRadius="6"></Border>
                 <Border Grid.Column="0" Width="Auto" Height="Auto" CornerRadius="6,0,0,6">
                     <Border.Background>
-                        <ImageBrush ImageSource="{Binding Thumbnail}" Stretch="UniformToFill"  />
+                        <ImageBrush ImageSource="{Binding Thumbnail}" Stretch="UniformToFill" />
                     </Border.Background>
                 </Border>
                 <!--Background="{Binding Converter={StaticResource RowColour}}"-->
                 <Border Grid.Column="1" Width="Auto" Height="Auto" CornerRadius="0,6,6,0">
                     <Border.Background>
-                        <ImageBrush ImageSource="{Binding BlurBgSource}" Stretch="UniformToFill" Opacity="0.5" />
+                        <ImageBrush ImageSource="{Binding BlurBgSource, Mode=OneWay}" Stretch="UniformToFill" Opacity="0.5" />
                     </Border.Background>
                     <StackPanel VerticalAlignment="Center" Margin="10" HorizontalAlignment="Left" Width="270">
                         <TextBlock FontSize="20" x:Name="Title" Margin="5" Foreground="White" Text="{Binding Title}" TextAlignment="Center" TextWrapping="Wrap" Height="58" HorizontalAlignment="Center" />

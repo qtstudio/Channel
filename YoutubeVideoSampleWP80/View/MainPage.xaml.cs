@@ -18,7 +18,6 @@ namespace YoutubeVideoSampleWP80.View
 {
     public partial class MainPage
     {
-
         public int Index = 1;
         public int MaxResults = 10;
         public const string YoutubeChannel = "JackyPhanChanel";
@@ -114,15 +113,15 @@ namespace YoutubeVideoSampleWP80.View
                         Thumbnail = new Uri(mediaGroup.Elements(media + "thumbnail").FirstOrDefault(o => o.Attribute(yt + "name").Value == "mqdefault").Attribute("url").Value)
                     };
 
-                    var img = new BitmapImage(video.Thumbnail) { CreateOptions = BitmapCreateOptions.None };
-                    img.ImageOpened += (s, e) =>
+                    var bm = new BitmapImage(video.Thumbnail) { CreateOptions = BitmapCreateOptions.None };
+                    bm.ImageOpened += (s, e) =>
                     {
                         if (video.BlurBgSource != null) return;
 
                         var wb = new WriteableBitmap((BitmapImage)s);
                         wb.BoxBlur(23);
                         video.BlurBgSource = wb;
-                        //wb.Invalidate();
+                        video.BlurBgSource.Invalidate();
                     };
 
                     var a = video.YoutubeLink.ToString().Remove(0, 31);
@@ -137,7 +136,6 @@ namespace YoutubeVideoSampleWP80.View
                 return null;
             }
         }
-
 
         //After selecting a video, navigate to the VideoPage
         private void VideosList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
