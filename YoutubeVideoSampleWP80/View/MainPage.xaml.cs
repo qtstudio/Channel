@@ -107,7 +107,7 @@ namespace YoutubeVideoSampleWP80.View
                         YoutubeLink = new Uri(item.Element("link").Value),
                         Title = item.Element("title").Value,
                         PubDate = DateTime.Parse(item.Element("pubDate").Value),
-                        Duration = new TimeSpan((int)mediaGroup.Element(yt + "duration").Attribute("seconds")),
+                        Duration = new TimeSpan(0,0,0,(int)mediaGroup.Element(yt + "duration").Attribute("seconds")),
                         Likes = (int)item.Element(yt + "rating").Attribute("numLikes"),
                         ViewCount = (int)item.Element(yt + "statistics").Attribute("viewCount"),
                         Thumbnail = new Uri(mediaGroup.Elements(media + "thumbnail").FirstOrDefault(o => o.Attribute(yt + "name").Value == "mqdefault").Attribute("url").Value)

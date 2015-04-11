@@ -114,6 +114,9 @@
     <Compile Include="View\SplashScreenPage.xaml.cs">
       <DependentUpon>SplashScreenPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Temp\VideoItem.xaml.cs">
+      <DependentUpon>VideoItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\VideoPage.xaml.cs">
       <DependentUpon>VideoPage.xaml</DependentUpon>
     </Compile>
@@ -137,16 +140,22 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\background.png" />
+    <Content Include="Assets\Icons\duration.png" />
+    <Content Include="Assets\Icons\likes.png" />
+    <Content Include="Assets\Icons\Next.png" />
+    <Content Include="Assets\Icons\Previous.png" />
     <Content Include="Assets\Icons\published.png" />
     <Content Include="Assets\Icons\rating.png" />
     <Content Include="Assets\Icons\viewCount.png" />
     <Content Include="Assets\Images\back.png" />
     <Content Include="Assets\Images\bg.jpg" />
+    <Content Include="Assets\Images\bgBlur.jpg" />
     <Content Include="Assets\Images\feature.search.png" />
     <Content Include="Assets\Images\next.png" />
-    <Content Include="Assets\Icons\Next.png" />
-    <Content Include="Assets\Icons\Previous.png" />
     <Content Include="Assets\Icons\Search.png" />
+    <Content Include="Assets\Images\testThumbnail.jpg" />
+    <Content Include="Assets\Images\testThumbnailBlur.jpg" />
+    <Content Include="Assets\Images\title.png" />
     <Content Include="Assets\Tiles\FlipCycleTileMedium.png" />
     <Content Include="Assets\Tiles\FlipCycleTileSmall.png" />
     <Content Include="larva.png" />
@@ -169,6 +178,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SplashScreenPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Temp\VideoItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

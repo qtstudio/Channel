@@ -18,13 +18,13 @@
         <!--<conv:ImgPathBlurConverter x:Key="ImgPathBlur" />-->
 
         <DataTemplate x:Key="VideoDataTemplate">
-            <Grid Margin="0,12">
+            <Grid Margin="0,12" Height="120">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="0" Grid.ColumnSpan="2" Canvas.ZIndex="-1" Background="#000000" Width="Auto" Height="Auto" CornerRadius="6"></Border>
+                <Border Grid.Column="0" Grid.ColumnSpan="2" Canvas.ZIndex="-1" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto" CornerRadius="6"></Border>
                 <Border Grid.Column="0" Width="Auto" Height="Auto" CornerRadius="6,0,0,6">
                     <Border.Background>
                         <ImageBrush ImageSource="{Binding Thumbnail}" Stretch="UniformToFill" />
@@ -41,14 +41,35 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="3*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Foreground="White" Text="{Binding Title}" TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center" />
-                        <TextBlock Grid.Row="1" Grid.Column="0" Foreground="White" Text="{Binding ViewCount}" />
-                        <TextBlock Grid.Row="1" Grid.Column="1" Foreground="White" Text="{Binding Likes}" />
-                        <TextBlock Grid.Row="2" Grid.Column="0" Foreground="White" Text="{Binding Duration}" />
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Foreground="#FF4BDFE6" FontSize="20" Text="{Binding Title}" TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center" FontFamily="Georgia" FontWeight="Bold" TextTrimming="WordEllipsis" MaxHeight="60"/>
+                        <Grid Grid.Row="1" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="/Assets/Icons/viewCount.png" Stretch="Uniform" Opacity="0.85"/>
+                            <TextBlock Grid.Column="1" FontSize="18" Text="{Binding ViewCount, StringFormat='{0:###,###}'}" Foreground="#AAFFFFFF" VerticalAlignment="Center" FontFamily="Meiryo UI"/>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="/Assets/Icons/likes.png" Stretch="Uniform" Opacity="0.85"/>
+                            <TextBlock Grid.Column="1" FontSize="18"  Text="{Binding Likes, StringFormat='{0:###,###}'}" Foreground="#AAFFFFFF" VerticalAlignment="Center" FontFamily="Meiryo UI"/>
+                        </Grid>
+                        <Grid Grid.Row="2" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="/Assets/Icons/duration.png" Stretch="Uniform" Opacity="0.85"/>
+                            <TextBlock Grid.Column="1" FontSize="18"  Text="{Binding Duration}" Foreground="#AAFFFFFF" VerticalAlignment="Center" FontFamily="Meiryo UI"/>
+                        </Grid>
                     </Grid>
                 </Border>
             </Grid>
@@ -58,28 +79,33 @@
     <!--Data context is set to sample data above and LayoutRoot contains the root grid where all other page content is placed-->
     <Grid x:Name="LayoutRoot" >
         <Grid.Background>
-            <ImageBrush Stretch="Fill" ImageSource="../Assets/Images/bg.jpg" AlignmentY="Top" AlignmentX="Center" Opacity="0.3"/>
+            <ImageBrush Stretch="UniformToFill" ImageSource="../Assets/Images/bgBlur.jpg" Opacity="0.3"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="TitlePanel" Margin="12">
+        <Grid x:Name="TitlePanel" Margin="12" Height="120">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Source="/larva2.png" Height="90" Width="90"/>
-            <TextBlock Grid.Column="1" VerticalAlignment="Center" x:Name="PageTitle" Text="Larva Cartoon" Foreground="White"
-                       FontSize="48" FontWeight="ExtraLight" FontFamily="/YoutubeVideoSampleWP80;component/Fonts/Fonts.zip#VNF Cinnamon Cake"/>
+            <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Source="/larva2.png"/>
+
+            <Image Grid.Column="1" Source="/Assets/Images/title.png" Stretch="Uniform"></Image>
+            <!--<TextBlock Grid.Column="1" VerticalAlignment="Center" x:Name="PageTitle" Text="Larva Cartoon" Foreground="White" FontSize="48" FontWeight="ExtraLight" FontFamily="/YoutubeVideoSampleWP80;component/Fonts/Fonts.zip#VNF Cinnamon Cake"/>-->
 
         </Grid>
 
         <!--ContentPanel contains ListBox and ListBox ItemTemplate. Place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="48"/>
+            </Grid.RowDefinitions>
             <phone:LongListSelector x:Name="ChannelVideos" SelectionChanged="VideosList_SelectionChanged" Visibility="Collapsed" ItemTemplate="{StaticResource VideoDataTemplate}"/>
             <ProgressBar x:Name="ChannelProgress" Foreground="White" VerticalAlignment="Center" IsIndeterminate="True" />
-            <Grid Grid.Row="0" VerticalAlignment="Bottom" Height="60">
+            <Grid Grid.Row="1" VerticalAlignment="Bottom">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -87,10 +113,10 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="1" Width="50" Height="50" Source="../Assets/Icons/Previous.png" MouseEnter="PreviousClick"/>
-                <TextBlock Grid.Column="2" Padding="0,6,0,0" Foreground="White" FontSize="24" FontWeight="Light" TextWrapping="Wrap" TextAlignment="Center" Text="1"  VerticalAlignment="Center" x:Name="CurrentPageXaml" Height="50"/>
-                <Image Grid.Column="3" Width="50" Height="50" Source="../Assets/Icons/Next.png" MouseEnter="NextClick"/>
-                <Image Grid.Column="4" Width="50" Height="50" Source="../Assets/Icons/Search.png" MouseEnter="SearchClick"/>
+                <Image Grid.Column="1" Source="../Assets/Icons/Previous.png" MouseEnter="PreviousClick"/>
+                <TextBlock Grid.Column="2" Padding="0,6,0,0" Foreground="White" FontSize="24" FontWeight="Light" TextWrapping="Wrap" TextAlignment="Center" Text="1" VerticalAlignment="Center" x:Name="CurrentPageXaml" Height="48"/>
+                <Image Grid.Column="3" Source="../Assets/Icons/Next.png" MouseEnter="NextClick"/>
+                <Image Grid.Column="4" Source="../Assets/Icons/Search.png" MouseEnter="SearchClick"/>
             </Grid>
         </Grid>
 
