@@ -111,7 +111,7 @@ namespace YoutubeVideoSampleWP80.View
                         Likes = (int)item.Element(yt + "rating").Attribute("numLikes"),
                         ViewCount = (int)item.Element(yt + "statistics").Attribute("viewCount"),
                         Thumbnail = new Uri(mediaGroup.Elements(media + "thumbnail").FirstOrDefault(o => o.Attribute(yt + "name").Value == "mqdefault").Attribute("url").Value),
-                        Rating = (float)Math.Round((float)item.Element(gd + "rating").Attribute("average"), 2)
+                        Rating = (float)item.Element(gd + "rating").Attribute("average")
                     };
 
                     var bm = new BitmapImage(video.Thumbnail) { CreateOptions = BitmapCreateOptions.None };

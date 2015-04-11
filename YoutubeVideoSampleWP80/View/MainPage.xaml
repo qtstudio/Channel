@@ -18,7 +18,7 @@
         <!--<conv:ImgPathBlurConverter x:Key="ImgPathBlur" />-->
 
         <DataTemplate x:Key="VideoDataTemplate">
-            <Grid Margin="0,12" Height="120">
+            <Grid Margin="0,6" Height="96">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="2*"/>
@@ -45,14 +45,14 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Foreground="#FF4BDFE6" FontSize="20" Text="{Binding Title}" TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center" FontFamily="Georgia" FontWeight="Bold" TextTrimming="WordEllipsis" MaxHeight="60"/>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Foreground="#FF4BDFE6" FontSize="18" Text="{Binding Title}" TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center" FontFamily="Georgia" FontWeight="Bold" TextTrimming="WordEllipsis" MaxHeight="60"/>
                         <Grid Grid.Row="1" Grid.Column="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
                             <Image Grid.Column="0" Source="/Assets/Icons/viewCount.png" Stretch="Uniform" Opacity="0.85"/>
-                            <TextBlock Grid.Column="1" FontSize="18" Text="{Binding ViewCount, StringFormat='{0:###,###}'}" Foreground="#AAFFFFFF" VerticalAlignment="Center" FontFamily="Meiryo UI"/>
+                            <TextBlock Grid.Column="1" FontSize="16" Text="{Binding ViewCount, StringFormat=N0}" Foreground="#AAFFFFFF" VerticalAlignment="Center" FontFamily="Meiryo UI"/>
                         </Grid>
                         <Grid Grid.Row="1" Grid.Column="1">
                             <Grid.ColumnDefinitions>
@@ -60,7 +60,7 @@
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
                             <Image Grid.Column="0" Source="/Assets/Icons/likes.png" Stretch="Uniform" Opacity="0.85"/>
-                            <TextBlock Grid.Column="1" FontSize="18"  Text="{Binding Likes, StringFormat='{0:###,###}'}" Foreground="#AAFFFFFF" VerticalAlignment="Center" FontFamily="Meiryo UI"/>
+                            <TextBlock Grid.Column="1" FontSize="16"  Text="{Binding Likes, StringFormat=N0}" Foreground="#AAFFFFFF" VerticalAlignment="Center" FontFamily="Meiryo UI"/>
                         </Grid>
                         <Grid Grid.Row="2" Grid.Column="0">
                             <Grid.ColumnDefinitions>
@@ -68,7 +68,7 @@
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
                             <Image Grid.Column="0" Source="/Assets/Icons/duration.png" Stretch="Uniform" Opacity="0.85"/>
-                            <TextBlock Grid.Column="1" FontSize="18"  Text="{Binding Duration}" Foreground="#AAFFFFFF" VerticalAlignment="Center" FontFamily="Meiryo UI"/>
+                            <TextBlock Grid.Column="1" FontSize="16"  Text="{Binding Duration}" Foreground="#AAFFFFFF" VerticalAlignment="Center" FontFamily="Meiryo UI"/>
                         </Grid>
                         <Grid Grid.Row="2" Grid.Column="1">
                             <Grid.ColumnDefinitions>
@@ -76,7 +76,7 @@
                                 <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
                             <Image Grid.Column="0" Source="/Assets/Icons/rating.png" Stretch="Uniform" Opacity="0.85"/>
-                            <TextBlock Grid.Column="1" FontSize="18"  Text="{Binding Rating}" Foreground="#AAFFFFFF" VerticalAlignment="Center" FontFamily="Meiryo UI"/>
+                            <TextBlock Grid.Column="1" FontSize="16"  Text="{Binding Rating, StringFormat=N2}" Foreground="#AAFFFFFF" VerticalAlignment="Center" FontFamily="Meiryo UI"/>
                         </Grid>
                     </Grid>
                 </Border>
@@ -93,7 +93,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="TitlePanel" Margin="12" Height="120">
+        <Grid x:Name="TitlePanel" Margin="12" Height="96">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="3*"/>
@@ -107,13 +107,9 @@
 
         <!--ContentPanel contains ListBox and ListBox ItemTemplate. Place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="48"/>
-            </Grid.RowDefinitions>
             <phone:LongListSelector x:Name="ChannelVideos" SelectionChanged="VideosList_SelectionChanged" Visibility="Collapsed" ItemTemplate="{StaticResource VideoDataTemplate}"/>
             <ProgressBar x:Name="ChannelProgress" Foreground="White" VerticalAlignment="Center" IsIndeterminate="True" />
-            <Grid Grid.Row="1" VerticalAlignment="Bottom">
+            <Grid VerticalAlignment="Bottom" Height="48">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -121,10 +117,35 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="1" Source="../Assets/Icons/Previous.png" MouseEnter="PreviousClick"/>
-                <TextBlock Grid.Column="2" Padding="0,6,0,0" Foreground="White" FontSize="24" FontWeight="Light" TextWrapping="Wrap" TextAlignment="Center" Text="{Binding Duration}" VerticalAlignment="Center" x:Name="CurrentPageXaml" Height="48"/>
-                <Image Grid.Column="3" Source="../Assets/Icons/Next.png" MouseEnter="NextClick"/>
-                <Image Grid.Column="4" Source="../Assets/Icons/Search.png" MouseEnter="SearchClick"/>
+                <Border Grid.Column="1" Margin="6,0" CornerRadius="6,6,0,0"  MouseEnter="PreviousClick">
+                    <Border.Background>
+                        <SolidColorBrush Color="DarkCyan"></SolidColorBrush>
+                        <!--<LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                            <GradientStop Color="#FF083232" Offset="0"/>
+                            <GradientStop Color="#FF188085" Offset="0.5"/>
+                            <GradientStop Color="#FFFFFBDE" Offset="1"/>
+                        </LinearGradientBrush>-->
+                    </Border.Background>
+                    <Image Source="../Assets/Icons/Previous.png"/>
+                </Border>
+                <Border Grid.Column="2" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="PreviousClick">
+                    <Border.Background>
+                        <SolidColorBrush Color="LightCyan"></SolidColorBrush>
+                    </Border.Background>
+                    <TextBlock Padding="0,6,0,0" Foreground="Black" FontSize="24" TextWrapping="Wrap" TextAlignment="Center" Text="1" VerticalAlignment="Center" x:Name="CurrentPageXaml" Height="48"/>
+                </Border>
+                <Border Grid.Column="3" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="NextClick">
+                    <Border.Background>
+                        <SolidColorBrush Color="DarkCyan"></SolidColorBrush>
+                    </Border.Background>
+                    <Image Source="../Assets/Icons/Next.png"/>
+                </Border>
+                <Border Grid.Column="4" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="SearchClick">
+                    <Border.Background>
+                        <SolidColorBrush Color="DarkCyan"></SolidColorBrush>
+                    </Border.Background>
+                    <Image Source="../Assets/Icons/Search.png"/>
+                </Border>
             </Grid>
         </Grid>
 
