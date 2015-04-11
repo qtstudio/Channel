@@ -15,6 +15,7 @@ namespace YoutubeVideoSampleWP80.Model
         public string Description { get; set; }
         public int Likes { get; set; }
         public int ViewCount { get; set; }
+        public float Rating { get; set; }
         public TimeSpan Duration { get; set; }
 
         private WriteableBitmap _blurBgSource;

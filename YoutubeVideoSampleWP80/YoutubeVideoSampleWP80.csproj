@@ -192,7 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Coding4Fun.Toolkit.Controls">
-      <HintPath>..\..\..\..\..\Downloads\Coding4Fun.Toolkit (Windows Phone 8)\Coding4Fun.Toolkit.Controls.dll</HintPath>
+      <HintPath>..\..\..\..\Downloads\Coding4Fun.Toolkit (Windows Phone 8)\Coding4Fun.Toolkit.Controls.dll</HintPath>
     </Reference>
     <Reference Include="GoogleAds">
       <HintPath>..\..\..\..\Downloads\googlemobileadssdkwindowsphone8\GoogleMobileAdsSdkWindowsPhone8-6.5.13\lib\windowsphone8\GoogleAds.dll</HintPath>
@@ -209,16 +209,14 @@
     <Reference Include="Microsoft.Threading.Tasks.Extensions.Phone">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\wp8\Microsoft.Threading.Tasks.Extensions.Phone.dll</HintPath>
     </Reference>
-    <Reference Include="MyToolkit, Version=2.3.28.0, Culture=neutral, PublicKeyToken=3e349a1360994d26, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MyToolkit.2.3.28.0\lib\portable-net45+wp8+win8+wpa81\MyToolkit.dll</HintPath>
+    <Reference Include="MyToolkit">
+      <HintPath>..\packages\MyToolkit.2.3.30.0\lib\portable-net45+wp8+win8+wpa81\MyToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="MyToolkit.Extended, Version=2.3.28.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MyToolkit.Extended.2.3.28.0\lib\wp80\MyToolkit.Extended.dll</HintPath>
+    <Reference Include="MyToolkit.Extended">
+      <HintPath>..\packages\MyToolkit.Extended.2.3.30.0\lib\wp80\MyToolkit.Extended.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.6\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RateMyApp">
       <HintPath>..\packages\RateMyApp.1.1.0\lib\sl4-wp71\RateMyApp.dll</HintPath>
@@ -231,9 +229,6 @@
     </Reference>
     <Reference Include="System.Net.Http.Primitives">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\sl4-windowsphone71\System.Net.Http.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ServiceModel.Syndication">
-      <HintPath>H:\Development\Presentation2013-2014\Hammamet_Seminaire_01-03-2014\Seminaire\0-Ressources\dll\System.ServiceModel.Syndication.dll</HintPath>
     </Reference>
     <Reference Include="WriteableBitmapExWinPhone, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WriteableBitmapEx.1.5.0.0\lib\WindowsPhone8\WriteableBitmapExWinPhone.dll</HintPath>

@@ -76,7 +76,7 @@ namespace YoutubeVideoSampleWP80.View
                 ChannelVideos.ItemsSource.Clear();
             ChannelVideos.ItemsSource = channelVideos;
 
-            //CurrentPageXaml.Text = CurrentPage.ToString();
+            CurrentPageXaml.Text = CurrentPage.ToString();
             ChannelVideos.Visibility = Visibility.Visible;
             ChannelProgress.Visibility = Visibility.Collapsed;
         }
@@ -88,7 +88,7 @@ namespace YoutubeVideoSampleWP80.View
                 var client = new HttpClient();
                 var feedXml = await client.GetStringAsync(new Uri(url));
 
-                var atomns = XNamespace.Get("http://www.w3.org/2005/Atom");
+                //var atomns = XNamespace.Get("http://www.w3.org/2005/Atom");
                 var yt = XNamespace.Get("http://gdata.youtube.com/schemas/2007");
                 var openSearch = XNamespace.Get("http://a9.com/-/spec/opensearch/1.1/");
                 var media = XNamespace.Get("http://search.yahoo.com/mrss/");
@@ -110,7 +110,8 @@ namespace YoutubeVideoSampleWP80.View
                         Duration = new TimeSpan(0,0,0,(int)mediaGroup.Element(yt + "duration").Attribute("seconds")),
                         Likes = (int)item.Element(yt + "rating").Attribute("numLikes"),
                         ViewCount = (int)item.Element(yt + "statistics").Attribute("viewCount"),
-                        Thumbnail = new Uri(mediaGroup.Elements(media + "thumbnail").FirstOrDefault(o => o.Attribute(yt + "name").Value == "mqdefault").Attribute("url").Value)
+                        Thumbnail = new Uri(mediaGroup.Elements(media + "thumbnail").FirstOrDefault(o => o.Attribute(yt + "name").Value == "mqdefault").Attribute("url").Value),
+                        Rating = (float)Math.Round((float)item.Element(gd + "rating").Attribute("average"), 2)
                     };
 
                     var bm = new BitmapImage(video.Thumbnail) { CreateOptions = BitmapCreateOptions.None };

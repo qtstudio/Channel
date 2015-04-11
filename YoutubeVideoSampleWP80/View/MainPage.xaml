@@ -70,6 +70,14 @@
                             <Image Grid.Column="0" Source="/Assets/Icons/duration.png" Stretch="Uniform" Opacity="0.85"/>
                             <TextBlock Grid.Column="1" FontSize="18"  Text="{Binding Duration}" Foreground="#AAFFFFFF" VerticalAlignment="Center" FontFamily="Meiryo UI"/>
                         </Grid>
+                        <Grid Grid.Row="2" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="/Assets/Icons/rating.png" Stretch="Uniform" Opacity="0.85"/>
+                            <TextBlock Grid.Column="1" FontSize="18"  Text="{Binding Rating}" Foreground="#AAFFFFFF" VerticalAlignment="Center" FontFamily="Meiryo UI"/>
+                        </Grid>
                     </Grid>
                 </Border>
             </Grid>
@@ -114,7 +122,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Image Grid.Column="1" Source="../Assets/Icons/Previous.png" MouseEnter="PreviousClick"/>
-                <TextBlock Grid.Column="2" Padding="0,6,0,0" Foreground="White" FontSize="24" FontWeight="Light" TextWrapping="Wrap" TextAlignment="Center" Text="1" VerticalAlignment="Center" x:Name="CurrentPageXaml" Height="48"/>
+                <TextBlock Grid.Column="2" Padding="0,6,0,0" Foreground="White" FontSize="24" FontWeight="Light" TextWrapping="Wrap" TextAlignment="Center" Text="{Binding Duration}" VerticalAlignment="Center" x:Name="CurrentPageXaml" Height="48"/>
                 <Image Grid.Column="3" Source="../Assets/Icons/Next.png" MouseEnter="NextClick"/>
                 <Image Grid.Column="4" Source="../Assets/Icons/Search.png" MouseEnter="SearchClick"/>
             </Grid>
