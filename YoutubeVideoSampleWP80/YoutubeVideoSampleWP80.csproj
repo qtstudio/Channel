@@ -99,6 +99,7 @@
     </Compile>
     <Compile Include="Converters\AlternateRowColour.cs" />
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="Model\Configuration.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
@@ -108,6 +109,7 @@
     </Compile>
     <Compile Include="Model\YoutubeVideo.cs" />
     <Compile Include="Utilities\BlurImage.cs" />
+    <Compile Include="Utilities\FileHelper.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -129,6 +131,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Config\config.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
@@ -146,15 +151,13 @@
     <Content Include="Assets\Icons\Previous.png" />
     <Content Include="Assets\Icons\published.png" />
     <Content Include="Assets\Icons\rating.png" />
+    <Content Include="Assets\Icons\Search.png" />
     <Content Include="Assets\Icons\viewCount.png" />
     <Content Include="Assets\Images\back.png" />
     <Content Include="Assets\Images\bg.jpg" />
     <Content Include="Assets\Images\bgBlur.jpg" />
     <Content Include="Assets\Images\feature.search.png" />
     <Content Include="Assets\Images\next.png" />
-    <Content Include="Assets\Icons\Search.png" />
-    <Content Include="Assets\Images\testThumbnail.jpg" />
-    <Content Include="Assets\Images\testThumbnailBlur.jpg" />
     <Content Include="Assets\Images\title.png" />
     <Content Include="Assets\Tiles\FlipCycleTileMedium.png" />
     <Content Include="Assets\Tiles\FlipCycleTileSmall.png" />
