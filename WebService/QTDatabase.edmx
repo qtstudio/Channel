@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="QTDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ChannelAppConfig">
           <Key>
             <PropertyRef Name="Id" />
@@ -18,16 +18,14 @@
           <Property Name="TypeData" Type="nvarchar" MaxLength="50" />
           <Property Name="OrderBy" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityContainer Name="DatabaseModelStoreContainer">
+        <EntityContainer Name="QTDatabaseModelStoreContainer">
           <EntitySet Name="ChannelAppConfig" EntityType="Self.ChannelAppConfig" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true" >
-          <EntitySet Name="ChannelAppConfigs" EntityType="DatabaseModel.ChannelAppConfig" />
-        </EntityContainer>
+      <Schema Namespace="QTDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="ChannelAppConfig">
           <Key>
             <PropertyRef Name="Id" />
@@ -41,23 +39,26 @@
           <Property Name="TypeData" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OrderBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityContainer Name="QTDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ChannelAppConfigs" EntityType="Self.ChannelAppConfig" />
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities" >
+        <EntityContainerMapping StorageEntityContainer="QTDatabaseModelStoreContainer" CdmEntityContainer="QTDatabaseEntities">
           <EntitySetMapping Name="ChannelAppConfigs">
-            <EntityTypeMapping TypeName="DatabaseModel.ChannelAppConfig">
+            <EntityTypeMapping TypeName="QTDatabaseModel.ChannelAppConfig">
               <MappingFragment StoreEntitySet="ChannelAppConfig">
-                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
-                <ScalarProperty Name="TypeData" ColumnName="TypeData" />
-                <ScalarProperty Name="Token" ColumnName="Token" />
-                <ScalarProperty Name="MaxResult" ColumnName="MaxResult" />
-                <ScalarProperty Name="Index" ColumnName="Index" />
-                <ScalarProperty Name="Query" ColumnName="Query" />
-                <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
+                <ScalarProperty Name="Query" ColumnName="Query" />
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="MaxResult" ColumnName="MaxResult" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="TypeData" ColumnName="TypeData" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

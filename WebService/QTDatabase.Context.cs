@@ -13,10 +13,10 @@ namespace WebService
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DatabaseEntities : DbContext
+    public partial class QTDatabaseEntities : DbContext
     {
-        public DatabaseEntities()
-            : base("name=DatabaseEntities")
+        public QTDatabaseEntities()
+            : base("name=QTDatabaseEntities")
         {
         }
     

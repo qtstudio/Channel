@@ -9,11 +9,11 @@ namespace WebService.Controllers
 {
     public class ValuesController : ApiController
     {
-        private readonly DatabaseEntities _databaseEntities = new DatabaseEntities();
+        private readonly QTDatabaseEntities _qtDatabaseEntities = new QTDatabaseEntities();
         // GET api/values
         public IEnumerable<string> Get()
         {
-            var channelAppConfig = _databaseEntities.ChannelAppConfigs.FirstOrDefault(o => o.Id == 1);
+            var channelAppConfig = _qtDatabaseEntities.ChannelAppConfigs.FirstOrDefault(o => o.Id == 1);
             if (channelAppConfig != null)
                 return new string[] { channelAppConfig.ChannelId};
             else return new string[] { "Quan kun"};
