@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Windows;
@@ -6,11 +7,13 @@ using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Xml.Linq;
+using Windows.Storage;
 using Coding4Fun.Toolkit.Controls;
 using Microsoft.Phone.Tasks;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Net.NetworkInformation;
+using Newtonsoft.Json;
 using YoutubeVideoSampleWP80.Model;
 using YoutubeVideoSampleWP80.Utilities;
 
@@ -18,21 +21,16 @@ namespace YoutubeVideoSampleWP80.View
 {
     public partial class MainPage
     {
-        public int Index = 1;
-        public int MaxResults = 10;
-        public const string YoutubeChannel = "JackyPhanChanel";
-        public string OrderBy = OrderByType.published.ToString();
-        public const string TypeData = "rss";
-        public const string Token = "AIzaSyDNRQKpwuOIdorBHisGMUgakC_hwvjD8l8";
+        private Configuration _configuration;
         public int TotalPage = 1;
         public int TotalResults;
         public int CurrentPage = 1;
-        public string Query = "";
+
         public MainPage()
         {
             InitializeComponent();
             FeedbackOverlay.VisibilityChanged += FeedbackOverlay_VisibilityChanged;
-
+            _configuration = ((App)Application.Current).Configuration;
         }
         void FeedbackOverlay_VisibilityChanged(object sender, EventArgs e)
         {
@@ -47,7 +45,7 @@ namespace YoutubeVideoSampleWP80.View
                 {
                     await GetDataForList();
 
-                    TotalPage = (int)Math.Ceiling((double)TotalResults / MaxResults);
+                    TotalPage = (int)Math.Ceiling((double)TotalResults / _configuration.MaxResult);
                 }
                 else
                 {
@@ -69,9 +67,9 @@ namespace YoutubeVideoSampleWP80.View
 
             var channelVideos =
                 await
-                    GetYoutubeChannel("http://gdata.youtube.com/feeds/api/users/" + YoutubeChannel +
-                                      "/uploads?alt=" + TypeData + "&v=2&orderby=" + OrderBy + "&start-index=" + Index +
-                                      "&max-results=" + MaxResults + (string.IsNullOrEmpty(Query) ? "" : ("&q=" + Query)));
+                    GetYoutubeChannel("http://gdata.youtube.com/feeds/api/users/" + _configuration.ChannelId +
+                                      "/uploads?alt=" + _configuration.TypeData + "&v=2&orderby=" + _configuration.OrderBy + "&start-index=" + _configuration.Index +
+                                      "&max-results=" + _configuration.MaxResult + (string.IsNullOrEmpty(_configuration.Query) ? "" : ("&q=" + _configuration.Query)));
             if (ChannelVideos.ItemsSource != null)
                 ChannelVideos.ItemsSource.Clear();
             ChannelVideos.ItemsSource = channelVideos;
@@ -107,7 +105,7 @@ namespace YoutubeVideoSampleWP80.View
                         YoutubeLink = new Uri(item.Element("link").Value),
                         Title = item.Element("title").Value,
                         PubDate = DateTime.Parse(item.Element("pubDate").Value),
-                        Duration = new TimeSpan(0,0,0,(int)mediaGroup.Element(yt + "duration").Attribute("seconds")),
+                        Duration = new TimeSpan(0, 0, 0, (int)mediaGroup.Element(yt + "duration").Attribute("seconds")),
                         Likes = (int)item.Element(yt + "rating").Attribute("numLikes"),
                         ViewCount = (int)item.Element(yt + "statistics").Attribute("viewCount"),
                         Thumbnail = new Uri(mediaGroup.Elements(media + "thumbnail").FirstOrDefault(o => o.Attribute(yt + "name").Value == "mqdefault").Attribute("url").Value),
@@ -155,24 +153,24 @@ namespace YoutubeVideoSampleWP80.View
 
         public async void NextClick(object sender, EventArgs e)
         {
-            Index += MaxResults;
-            if (Index >= TotalResults)
+            _configuration.Index += _configuration.MaxResult;
+            if (_configuration.Index >= TotalResults)
             {
-                Index -= MaxResults;
+                _configuration.Index -= _configuration.MaxResult;
                 return;
             }
-            CurrentPage = Index / MaxResults + 1;
+            CurrentPage = _configuration.Index / _configuration.MaxResult + 1;
             await GetDataForList();
         }
         public async void PreviousClick(object sender, EventArgs e)
         {
-            Index -= MaxResults;
-            if (Index < 1)
+            _configuration.Index -= _configuration.MaxResult;
+            if (_configuration.Index < 1)
             {
-                Index += MaxResults;
+                _configuration.Index += _configuration.MaxResult;
                 return;
             }
-            CurrentPage = Index / MaxResults + 1;
+            CurrentPage = _configuration.Index / _configuration.MaxResult + 1;
             await GetDataForList();
         }
 
@@ -181,33 +179,33 @@ namespace YoutubeVideoSampleWP80.View
             var input = new InputPrompt();
             input.Completed += input_Completed;
             input.Title = "Search";
-            input.Value = HttpUtility.UrlDecode(Query);
+            input.Value = HttpUtility.UrlDecode(_configuration.Query);
             input.Show();
         }
 
         private async void input_Completed(object sender, PopUpEventArgs<string, PopUpResult> e)
         {
-            Index = 1;
-            CurrentPage = Index / MaxResults + 1;
-            Query = HttpUtility.UrlEncode(e.Result);
+            _configuration.Index = 1;
+            CurrentPage = _configuration.Index / _configuration.MaxResult + 1;
+            _configuration.Query = HttpUtility.UrlEncode(e.Result);
             await GetDataForList();
         }
 
         public async void PublishedClick(object sender, EventArgs e)
         {
-            OrderBy = OrderByType.published.ToString();
+            _configuration.OrderBy = OrderByType.published.ToString();
             await GetDataForList();
         }
 
         public async void RatingClick(object sender, EventArgs e)
         {
-            OrderBy = OrderByType.rating.ToString();
+            _configuration.OrderBy = OrderByType.rating.ToString();
             await GetDataForList();
         }
 
         public async void ViewCountClick(object sender, EventArgs e)
         {
-            OrderBy = OrderByType.viewCount.ToString();
+            _configuration.OrderBy = OrderByType.viewCount.ToString();
             await GetDataForList();
         }
 

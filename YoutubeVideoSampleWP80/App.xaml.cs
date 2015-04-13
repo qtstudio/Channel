@@ -1,12 +1,19 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
+using System.IO.IsolatedStorage;
 using System.Resources;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
+using Windows.Storage;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using MyToolkit.Utilities;
+using Newtonsoft.Json;
+using YoutubeVideoSampleWP80.Model;
 using YoutubeVideoSampleWP80.Resources;
+using YoutubeVideoSampleWP80.Utilities;
 
 namespace YoutubeVideoSampleWP80
 {
@@ -17,6 +24,8 @@ namespace YoutubeVideoSampleWP80
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
+
+        public Configuration Configuration { get; private set; }
 
         /// <summary>
         /// Constructor for the Application object.
@@ -61,6 +70,7 @@ namespace YoutubeVideoSampleWP80
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            LoadConfig();
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -75,6 +85,19 @@ namespace YoutubeVideoSampleWP80
         {
         }
 
+        private async void LoadConfig()
+        {
+            // Get a file from the installation folder with the ms-appx URI scheme.
+            //var fileStream = File.OpenRead("/Config/config.json");
+            StorageFile sFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(@"Config\config.json");
+
+            var fileStream = await sFile.OpenStreamForReadAsync();
+            using (var streamReader = new StreamReader(fileStream))
+            {
+                var content = streamReader.ReadToEnd();
+                Configuration = JsonConvert.DeserializeObject<Configuration>(content);
+            }
+        }
         // Code to execute when the application is closing (eg, user hit Back)
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
