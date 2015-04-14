@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Collections.Generic;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Xml.Linq;
@@ -229,6 +230,11 @@ namespace YoutubeVideoSampleWP80.View
             emailComposeTask.To = "joy.entertainment@outlook.com";
 
             emailComposeTask.Show();
+        }
+
+        private void GoPivotPage(object sender, MouseEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/PivotPage1.xaml", UriKind.Relative));
         }
     }
 }
