@@ -223,18 +223,14 @@ namespace YoutubeVideoSampleWP80.View
 
         public void FeedbackClick(object sender, EventArgs e)
         {
-            var emailComposeTask = new EmailComposeTask();
-
-            emailComposeTask.Subject = "Feedback of Larva";
-            emailComposeTask.Body = "";
-            emailComposeTask.To = "joy.entertainment@outlook.com";
+            var emailComposeTask = new EmailComposeTask
+            {
+                Subject = "Feedback of Larva",
+                Body = "",
+                To = "joy.entertainment@outlook.com"
+            };
 
             emailComposeTask.Show();
-        }
-
-        private void GoPivotPage(object sender, MouseEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/PivotPage1.xaml", UriKind.Relative));
         }
     }
 }
