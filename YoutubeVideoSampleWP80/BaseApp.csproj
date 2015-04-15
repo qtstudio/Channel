@@ -114,6 +114,7 @@
     <Compile Include="Model\YoutubeVideo.cs" />
     <Compile Include="Utilities\BlurImage.cs" />
     <Compile Include="Utilities\Common.cs" />
+    <Compile Include="Utilities\DetectorLongList.cs" />
     <Compile Include="Utilities\FileHelper.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
