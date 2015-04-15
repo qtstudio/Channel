@@ -10,6 +10,7 @@ using System.Windows.Navigation;
 using System.Xml.Linq;
 using Windows.Storage;
 using Coding4Fun.Toolkit.Controls;
+using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -44,7 +45,7 @@ namespace YoutubeVideoSampleWP80.View
             if (compressionEventArgs.Type == CompressionType.Bottom)
             {
                 _configuration.Index += _configuration.MaxResult;
-                await GetDataForList();
+                await GetDataForList("Loading more videos...");
             }
         }
 
@@ -63,7 +64,8 @@ namespace YoutubeVideoSampleWP80.View
                     {
                         ChannelVideos.ItemsSource.Clear();
                     }
-                    await GetDataForList();
+
+                    await GetDataForList("Loading videos...");
 
                     //TotalPage = (int)Math.Ceiling((double)TotalResults / _configuration.MaxResult);
                 }
@@ -80,16 +82,17 @@ namespace YoutubeVideoSampleWP80.View
             base.OnNavigatedTo(e);
         }
 
-        private async Task GetDataForList()
+        private async Task GetDataForList(string contentLoading)
         {
-            //ChannelVideos.Visibility = Visibility.Collapsed;
-            //ChannelProgress.Visibility = Visibility.Visible;
+            Indicator.Text = contentLoading;
+            Indicator.IsIndeterminate = true;
 
             var channelVideos =
                 await
                     GetYoutubeChannel("http://gdata.youtube.com/feeds/api/users/" + _configuration.ChannelId +
                                       "/uploads?alt=" + _configuration.TypeData + "&v=2&orderby=" + _configuration.OrderBy + "&start-index=" + _configuration.Index +
                                       "&max-results=" + _configuration.MaxResult + (string.IsNullOrEmpty(_configuration.Query) ? "" : ("&q=" + _configuration.Query)));
+            
             if (ChannelVideos.ItemsSource == null)
             {
                 ChannelVideos.ItemsSource = channelVideos;
@@ -103,11 +106,9 @@ namespace YoutubeVideoSampleWP80.View
                 }
                 _detectorLongList.Bind(ChannelVideos);
             }
-            
 
-            ////CurrentPageXaml.Text = CurrentPage.ToString();
-            //ChannelVideos.Visibility = Visibility.Visible;
-            //ChannelProgress.Visibility = Visibility.Collapsed;
+            Indicator.Text = "";
+            Indicator.IsIndeterminate = false;
         }
 
         private async Task<List<YoutubeVideo>> GetYoutubeChannel(string url)
@@ -119,7 +120,7 @@ namespace YoutubeVideoSampleWP80.View
 
                 //var atomns = XNamespace.Get("http://www.w3.org/2005/Atom");
                 var yt = XNamespace.Get("http://gdata.youtube.com/schemas/2007");
-                var openSearch = XNamespace.Get("http://a9.com/-/spec/opensearch/1.1/");
+                //var openSearch = XNamespace.Get("http://a9.com/-/spec/opensearch/1.1/");
                 var media = XNamespace.Get("http://search.yahoo.com/mrss/");
                 var gd = XNamespace.Get("http://schemas.google.com/g/2005");
 
@@ -219,25 +220,25 @@ namespace YoutubeVideoSampleWP80.View
             //_configuration.Index = 1;
             //CurrentPage = _configuration.Index / _configuration.MaxResult + 1;
             _configuration.Query = HttpUtility.UrlEncode(e.Result);
-            await GetDataForList();
+            await GetDataForList("Searching...");
         }
 
         public async void PublishedClick(object sender, EventArgs e)
         {
             _configuration.OrderBy = OrderByType.published.ToString();
-            await GetDataForList();
+            await GetDataForList("Loading videos...");
         }
 
         public async void RatingClick(object sender, EventArgs e)
         {
             _configuration.OrderBy = OrderByType.rating.ToString();
-            await GetDataForList();
+            await GetDataForList("Loading videos...");
         }
 
         public async void ViewCountClick(object sender, EventArgs e)
         {
             _configuration.OrderBy = OrderByType.viewCount.ToString();
-            await GetDataForList();
+            await GetDataForList("Loading videos...");
         }
 
         public void RateAndReviewClick(object sender, EventArgs e)
@@ -248,7 +249,7 @@ namespace YoutubeVideoSampleWP80.View
 
         public async void ReloadClick(object sender, EventArgs e)
         {
-            await GetDataForList();
+            await GetDataForList("Loading videos...");
         }
 
         public void FeedbackClick(object sender, EventArgs e)
@@ -261,7 +262,6 @@ namespace YoutubeVideoSampleWP80.View
             };
 
             emailComposeTask.Show();
-            
         }
     }
 }
