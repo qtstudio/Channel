@@ -22,17 +22,32 @@ namespace YoutubeVideoSampleWP80.View
 {
     public partial class MainPage
     {
-        private Configuration _configuration;
-        public int TotalPage = 1;
-        public int TotalResults;
-        public int CurrentPage = 1;
+        private readonly Configuration _configuration;
+        private readonly DetectorLongList _detectorLongList;
+        
+        //public int TotalPage = 1;
+        //public int TotalResults;
+        //public int CurrentPage = 1;
 
         public MainPage()
         {
             InitializeComponent();
             FeedbackOverlay.VisibilityChanged += FeedbackOverlay_VisibilityChanged;
             _configuration = ((App)Application.Current).Configuration;
+            _detectorLongList = new DetectorLongList();
+            _detectorLongList.Compression += GetMoreVideos;
+            _detectorLongList.Bind(ChannelVideos);
         }
+
+        private async void GetMoreVideos(object sender, CompressionEventArgs compressionEventArgs)
+        {
+            if (compressionEventArgs.Type == CompressionType.Bottom)
+            {
+                _configuration.Index += _configuration.MaxResult;
+                await GetDataForList();
+            }
+        }
+
         void FeedbackOverlay_VisibilityChanged(object sender, EventArgs e)
         {
             ApplicationBar.IsVisible = (FeedbackOverlay.Visibility != Visibility.Visible);
@@ -44,9 +59,13 @@ namespace YoutubeVideoSampleWP80.View
             {
                 if (NetworkInterface.GetIsNetworkAvailable())
                 {
+                    if (ChannelVideos.ItemsSource != null)
+                    {
+                        ChannelVideos.ItemsSource.Clear();
+                    }
                     await GetDataForList();
 
-                    TotalPage = (int)Math.Ceiling((double)TotalResults / _configuration.MaxResult);
+                    //TotalPage = (int)Math.Ceiling((double)TotalResults / _configuration.MaxResult);
                 }
                 else
                 {
@@ -63,21 +82,32 @@ namespace YoutubeVideoSampleWP80.View
 
         private async Task GetDataForList()
         {
-            ChannelVideos.Visibility = Visibility.Collapsed;
-            ChannelProgress.Visibility = Visibility.Visible;
+            //ChannelVideos.Visibility = Visibility.Collapsed;
+            //ChannelProgress.Visibility = Visibility.Visible;
 
             var channelVideos =
                 await
                     GetYoutubeChannel("http://gdata.youtube.com/feeds/api/users/" + _configuration.ChannelId +
                                       "/uploads?alt=" + _configuration.TypeData + "&v=2&orderby=" + _configuration.OrderBy + "&start-index=" + _configuration.Index +
                                       "&max-results=" + _configuration.MaxResult + (string.IsNullOrEmpty(_configuration.Query) ? "" : ("&q=" + _configuration.Query)));
-            if (ChannelVideos.ItemsSource != null)
-                ChannelVideos.ItemsSource.Clear();
-            ChannelVideos.ItemsSource = channelVideos;
+            if (ChannelVideos.ItemsSource == null)
+            {
+                ChannelVideos.ItemsSource = channelVideos;
+            }
+            else
+            {
+                _detectorLongList.Unbind();
+                foreach (var item in channelVideos)
+                {
+                    ChannelVideos.ItemsSource.Add(item);
+                }
+                _detectorLongList.Bind(ChannelVideos);
+            }
+            
 
-            CurrentPageXaml.Text = CurrentPage.ToString();
-            ChannelVideos.Visibility = Visibility.Visible;
-            ChannelProgress.Visibility = Visibility.Collapsed;
+            ////CurrentPageXaml.Text = CurrentPage.ToString();
+            //ChannelVideos.Visibility = Visibility.Visible;
+            //ChannelProgress.Visibility = Visibility.Collapsed;
         }
 
         private async Task<List<YoutubeVideo>> GetYoutubeChannel(string url)
@@ -97,7 +127,7 @@ namespace YoutubeVideoSampleWP80.View
                 var channel = xml.Element("channel");
                 var items = channel.Elements("item");
                 var videosList = new List<YoutubeVideo>();
-                TotalResults = int.Parse(channel.Element(openSearch + "totalResults").Value);
+                //TotalResults = int.Parse(channel.Element(openSearch + "totalResults").Value);
                 foreach (var item in items)
                 {
                     var mediaGroup = item.Element(media + "group");
@@ -152,28 +182,28 @@ namespace YoutubeVideoSampleWP80.View
             base.OnBackKeyPress(e);
         }
 
-        public async void NextClick(object sender, EventArgs e)
-        {
-            _configuration.Index += _configuration.MaxResult;
-            if (_configuration.Index >= TotalResults)
-            {
-                _configuration.Index -= _configuration.MaxResult;
-                return;
-            }
-            CurrentPage = _configuration.Index / _configuration.MaxResult + 1;
-            await GetDataForList();
-        }
-        public async void PreviousClick(object sender, EventArgs e)
-        {
-            _configuration.Index -= _configuration.MaxResult;
-            if (_configuration.Index < 1)
-            {
-                _configuration.Index += _configuration.MaxResult;
-                return;
-            }
-            CurrentPage = _configuration.Index / _configuration.MaxResult + 1;
-            await GetDataForList();
-        }
+        //public async void NextClick(object sender, EventArgs e)
+        //{
+        //    _configuration.Index += _configuration.MaxResult;
+        //    if (_configuration.Index >= TotalResults)
+        //    {
+        //        _configuration.Index -= _configuration.MaxResult;
+        //        return;
+        //    }
+        //    CurrentPage = _configuration.Index / _configuration.MaxResult + 1;
+        //    await GetDataForList();
+        //}
+        //public async void PreviousClick(object sender, EventArgs e)
+        //{
+        //    _configuration.Index -= _configuration.MaxResult;
+        //    if (_configuration.Index < 1)
+        //    {
+        //        _configuration.Index += _configuration.MaxResult;
+        //        return;
+        //    }
+        //    CurrentPage = _configuration.Index / _configuration.MaxResult + 1;
+        //    await GetDataForList();
+        //}
 
         public async void SearchClick(object sender, EventArgs e)
         {
@@ -186,8 +216,8 @@ namespace YoutubeVideoSampleWP80.View
 
         private async void input_Completed(object sender, PopUpEventArgs<string, PopUpResult> e)
         {
-            _configuration.Index = 1;
-            CurrentPage = _configuration.Index / _configuration.MaxResult + 1;
+            //_configuration.Index = 1;
+            //CurrentPage = _configuration.Index / _configuration.MaxResult + 1;
             _configuration.Query = HttpUtility.UrlEncode(e.Result);
             await GetDataForList();
         }
@@ -230,6 +260,7 @@ namespace YoutubeVideoSampleWP80.View
             emailComposeTask.To = "joy.entertainment@outlook.com";
 
             emailComposeTask.Show();
+            
         }
 
         private void GoPivotPage(object sender, MouseEventArgs e)
