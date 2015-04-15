@@ -7,7 +7,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Xml.Linq;
 using Coding4Fun.Toolkit.Controls;
-using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -60,7 +59,7 @@ namespace YoutubeVideoSampleWP80.View
         {
             if (compressionEventArgs.Type == CompressionType.Bottom)
             {
-                _configuration.Index += _configuration.MaxResult;
+                _index += MaxResult;
                 await GetDataForList("Loading more videos...");
             }
         }
@@ -110,7 +109,7 @@ namespace YoutubeVideoSampleWP80.View
                     GetYoutubeChannel("http://gdata.youtube.com/feeds/api/users/" + channelInfo.ChannelId +
                                       "/uploads?alt=" + channelInfo.TypeData + "&v=2&orderby=" + _orderBy + "&start-index=" + _index +
                                       "&max-results=" + MaxResult + (string.IsNullOrEmpty(_query) ? "" : ("&q=" + _query)));
-            if (ChannelVideos.ItemsSource != null)
+            if (ChannelVideos.ItemsSource == null)
                 ChannelVideos.ItemsSource = channelVideos;
             else
             {
@@ -234,25 +233,25 @@ namespace YoutubeVideoSampleWP80.View
         {
             //_configuration.Index = 1;
             //CurrentPage = _configuration.Index / _configuration.MaxResult + 1;
-            _configuration.Query = HttpUtility.UrlEncode(e.Result);
+            _query = HttpUtility.UrlEncode(e.Result);
             await GetDataForList("Searching...");
         }
 
         public async void PublishedClick(object sender, EventArgs e)
         {
-            _configuration.OrderBy = OrderByType.published.ToString();
+            _orderBy = OrderByType.published.ToString();
             await GetDataForList("Loading videos...");
         }
 
         public async void RatingClick(object sender, EventArgs e)
         {
-            _configuration.OrderBy = OrderByType.rating.ToString();
+            _orderBy = OrderByType.rating.ToString();
             await GetDataForList("Loading videos...");
         }
 
         public async void ViewCountClick(object sender, EventArgs e)
         {
-            _configuration.OrderBy = OrderByType.viewCount.ToString();
+            _orderBy = OrderByType.viewCount.ToString();
             await GetDataForList("Loading videos...");
         }
 

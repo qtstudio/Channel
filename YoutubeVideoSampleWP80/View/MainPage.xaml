@@ -14,7 +14,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
-    
+
     <phone:PhoneApplicationPage.Resources>
         <!--<conv:ImgPathBlurConverter x:Key="ImgPathBlur" />-->
 
@@ -128,11 +128,13 @@
                 <!--<Border Grid.Column="1" Margin="6,0" CornerRadius="6,6,0,0"  MouseEnter="PreviousClick">
                     <Border.Background>
                         <SolidColorBrush Color="DarkCyan"></SolidColorBrush>
-                        --><!--<LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                        -->
+                <!--<LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
                             <GradientStop Color="#FF083232" Offset="0"/>
                             <GradientStop Color="#FF188085" Offset="0.5"/>
                             <GradientStop Color="#FFFFFBDE" Offset="1"/>
-                        </LinearGradientBrush>--><!--
+                        </LinearGradientBrush>-->
+                <!--
                     </Border.Background>
                     <Image Source="../Assets/Icons/Previous.png"/>
                 </Border>
