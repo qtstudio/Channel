@@ -18,7 +18,7 @@
         <!--<conv:ImgPathBlurConverter x:Key="ImgPathBlur" />-->
 
         <DataTemplate x:Key="VideoDataTemplate">
-            <Grid Margin="0,6" Height="96">
+            <Grid Margin="0,6" Height="108">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="2*"/>
@@ -117,13 +117,13 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-
-                <Border Grid.Column="0" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="GoPivotPage">
+       
+                <!--<Border Grid.Column="0" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="GoPivotPage">
                     <Border.Background>
                         <SolidColorBrush Color="LightCyan"></SolidColorBrush>
                     </Border.Background>
                     <TextBlock Padding="0,6,0,0" Foreground="Black" FontSize="24" TextWrapping="Wrap" TextAlignment="Center" Text="Pivot" VerticalAlignment="Center" Height="48"/>
-                </Border>
+                </Border>-->
                 <!--<Border Grid.Column="1" Margin="6,0" CornerRadius="6,6,0,0"  MouseEnter="PreviousClick">
                     <Border.Background>
                         <SolidColorBrush Color="DarkCyan"></SolidColorBrush>

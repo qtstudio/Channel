@@ -114,9 +114,6 @@
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PivotPage1.xaml.cs">
-      <DependentUpon>PivotPage1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\SplashScreenPage.xaml.cs">
       <DependentUpon>SplashScreenPage.xaml</DependentUpon>
     </Compile>
@@ -181,10 +178,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="View\MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\PivotPage1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
