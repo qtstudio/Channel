@@ -34,7 +34,7 @@ namespace BackEndApp
                     UseShellExecute = false,
                     FileName = "cmd.exe",
                     Arguments =
-                        "/K cd C:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\VC & vcvarsall.bat & CD E:\\YoutubeVideoSampleWP80\\BaseApp.csproj  /p:Configuration=Release"
+                        "/K cd C:\\Program Files (x86)\\Microsoft Visual Studio 12.0\\VC & vcvarsall.bat  & CD C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319 & MSBuild C:\\Users\\nvtan_000\\Documents\\GitHub\\Channel\\YoutubeVideoSampleWP80\\BaseApp.csproj  /p:Configuration=Release"
                 }
             };
             si.Start();
