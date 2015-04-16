@@ -20,6 +20,7 @@ namespace BackEndApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly QTDatabaseEntities _qtDatabaseEntities = new QTDatabaseEntities();
         public MainWindow()
         {
             InitializeComponent();
@@ -39,6 +40,23 @@ namespace BackEndApp
             };
             si.Start();
             si.Close();
+        }
+
+        private void BtnCreateChannelInfo(object sender, RoutedEventArgs e)
+        {
+            _qtDatabaseEntities.ChannelAppConfigs.Add(new ChannelAppConfig
+            {
+                ChannelId = "test",
+                Index = 1,
+                MaxResult = 10,
+                OrderBy = "published",
+                Query = "",
+                TypeData = "rss"
+            });
+            _qtDatabaseEntities.SaveChanges();
+            MessageBox.Show("Create successfully!");
+
+            //_qtDatabaseEntities.ChannelAppConfigs.ToList();
         }
     }
 }
