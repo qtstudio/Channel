@@ -1,8 +1,114 @@
 ﻿<Window x:Class="BackEndApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="Channel Management Tool" Height="600" Width="800">
+    <TabControl>
+        <TabItem Header="App">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <ListBox Grid.Column="0" Grid.Row="0" />
+                <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0.6">
+                    <Button Content="Export JSON" Background="Green"  Foreground="White" BorderThickness="0" Padding="6" />
+                    <Button Content="Batch Build" Background="RoyalBlue" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" Margin="6">
+                    <GroupBox Header="Basic Info" BorderBrush="CornflowerBlue">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" HorizontalAlignment="Right">Name</Label>
+                            <TextBox Grid.Column="1" Height="24" VerticalAlignment="Top"/>
+                            <Label Grid.Column="2" HorizontalAlignment="Right">Description</Label>
+                            <TextBox Grid.Column="3" TextWrapping="Wrap" Height="48" VerticalAlignment="Top"></TextBox>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Channels">
+                        
+                    </GroupBox>
+                    <GroupBox Header="Store Info" BorderBrush="Teal">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0" HorizontalAlignment="Right">Name</Label>
+                            <TextBox Grid.Column="1" Height="24" VerticalAlignment="Top"/>
+                            <Label Grid.Column="2" HorizontalAlignment="Right">Link</Label>
+                            <TextBox Grid.Column="3" TextWrapping="Wrap" Height="48" VerticalAlignment="Top"></TextBox>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Tags"/>
+                    <GroupBox Header="Characters"/>
+
+
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="6">
+                    <Button Content="Create" Background="RoyalBlue" Foreground="White" BorderThickness="0" Padding="6" />
+                    <Button Content="Update" Background="RoyalBlue" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0" />
+                    <Button Content="Export JSON" Background="Green" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0" />
+                    <Button Content="Batch Build" Background="Teal" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0"/>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Channel">
+            <Grid Background="#FFE5E5E5">
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Column="0" Grid.Row="0" Margin="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" HorizontalAlignment="Right">Channel Id</Label>
+                        <TextBox Grid.Column="1"></TextBox>
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.Row="0" Margin="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" HorizontalAlignment="Right">Token</Label>
+                        <TextBox Grid.Column="1"></TextBox>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Character">
+            <Grid Background="#FFE5E5E5"/>
+        </TabItem>
+        <TabItem Header="Tag">
+            <Grid Background="#FFE5E5E5"/>
+        </TabItem>
+        <TabItem Header="Color Scheme">
+            <Grid Background="#FFE5E5E5"/>
+        </TabItem>
+    </TabControl>
+
 </Window>

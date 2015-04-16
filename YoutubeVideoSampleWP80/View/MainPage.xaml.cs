@@ -47,6 +47,7 @@ namespace YoutubeVideoSampleWP80.View
 
         public MainPage()
         {
+            DataContext = InterfaceViewModel;
             InitializeComponent();
             FeedbackOverlay.VisibilityChanged += FeedbackOverlay_VisibilityChanged;
             _configuration = ((App)Application.Current).Configuration;
