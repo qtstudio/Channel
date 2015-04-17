@@ -44,17 +44,18 @@ namespace BackEndApp
 
         private void BtnCreateChannelInfo(object sender, RoutedEventArgs e)
         {
-            _qtDatabaseEntities.ChannelAppConfigs.Add(new ChannelAppConfig
-            {
-                ChannelId = "test",
-                Index = 1,
-                MaxResult = 10,
-                OrderBy = "published",
-                Query = "",
-                TypeData = "rss"
-            });
-            _qtDatabaseEntities.SaveChanges();
-            MessageBox.Show("Create successfully!");
+            MessageBox.Show(_qtDatabaseEntities.Tests.First().tang);
+            //_qtDatabaseEntities.ChannelAppConfigs.Add(new ChannelAppConfig
+            //{
+            //    ChannelId = "test",
+            //    Index = 1,
+            //    MaxResult = 10,
+            //    OrderBy = "published",
+            //    Query = "",
+            //    TypeData = "rss"
+            //});
+            //_qtDatabaseEntities.SaveChanges();
+            //MessageBox.Show("Create successfully!");
 
             //_qtDatabaseEntities.ChannelAppConfigs.ToList();
         }

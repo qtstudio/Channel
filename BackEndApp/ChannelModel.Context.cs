@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebService
+namespace BackEndApp
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QTDatabaseEntities : DbContext
+    public partial class ChannelDBEntities : DbContext
     {
-        public QTDatabaseEntities()
-            : base("name=QTDatabaseEntities")
+        public ChannelDBEntities()
+            : base("name=ChannelDBEntities")
         {
         }
     
@@ -25,6 +25,5 @@ namespace WebService
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<ChannelAppConfig> ChannelAppConfigs { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\nvtan_000\Documents\GitHub\Channel\BackEndApp\QTDatabase.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\Projects\WP8\Channel\WebService\ChannelModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

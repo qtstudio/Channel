@@ -13,10 +13,10 @@ namespace WebService.Controllers
         // GET api/values
         public IEnumerable<string> Get()
         {
-            var channelAppConfig = _qtDatabaseEntities.ChannelAppConfigs.FirstOrDefault(o => o.Id == 1);
-            if (channelAppConfig != null)
-                return new string[] { channelAppConfig.ChannelId};
-            else return new string[] { "Quan kun"};
+            //var channelAppConfig = _qtDatabaseEntities.ChannelAppConfigs.FirstOrDefault(o => o.Id == 1);
+            //if (channelAppConfig != null)
+            //    return new string[] { channelAppConfig.ChannelId};
+             return new string[] { "Quan kun"};
         }
 
         // GET api/values/5
