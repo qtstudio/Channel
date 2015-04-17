@@ -1,4 +1,4 @@
-﻿<Window x:Class="BackEndApp.MainWindow"
+﻿<Window x:Class="BackendApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Channel Management Tool" Height="600" Width="800">
@@ -19,39 +19,54 @@
                     <Button Content="Export JSON" Background="Green"  Foreground="White" BorderThickness="0" Padding="6" />
                     <Button Content="Batch Build" Background="RoyalBlue" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0" Click="BtnBuildAllApp"/>
                 </StackPanel>
-                <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical" Margin="6">
-                    <GroupBox Header="Basic Info" BorderBrush="CornflowerBlue">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="2*"/>
-                            </Grid.ColumnDefinitions>
+                <StackPanel x:Name="AppInfoView" Grid.Column="1" Grid.Row="0" Orientation="Vertical" Margin="6" DataContext="{StaticResource AppDataViewModel}">
+                    <StackPanel DataContext="{Binding Path=AppSharedViewModel}">
+                        <GroupBox Header="Basic Info" BorderBrush="CornflowerBlue">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="5*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
 
-                            <Label Grid.Column="0" HorizontalAlignment="Right">Name</Label>
-                            <TextBox Grid.Column="1" Height="24" VerticalAlignment="Top"/>
-                            <Label Grid.Column="2" HorizontalAlignment="Right">Description</Label>
-                            <TextBox Grid.Column="3" TextWrapping="Wrap" Height="48" VerticalAlignment="Top"></TextBox>
-                        </Grid>
-                    </GroupBox>
+                                <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">Name</Label>
+                                <TextBox Grid.Column="1" Grid.Row="0" TextWrapping="Wrap"
+                                         Text="{Binding Path=Name, Mode=TwoWay}"/>
+                                <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">Short Desc</Label>
+                                <TextBox Grid.Column="1" Grid.Row="1" TextWrapping="Wrap"
+                                         Text="{Binding Path=ShortDesc, Mode=TwoWay}"/>
+                                <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right">Long Desc</Label>
+                                <TextBox Grid.Column="1" Grid.Row="2" TextWrapping="Wrap"
+                                         Text="{Binding Path=LongDesc, Mode=TwoWay}"/>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Header="Store Info" BorderBrush="Teal">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="5*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">Name</Label>
+                                <TextBox Grid.Column="1" Grid.Row="0" TextWrapping="Wrap" MaxLength="50"
+                                         Text="{Binding Path=NameOnStore, Mode=TwoWay}"/>
+                                <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">Link</Label>
+                                <TextBox Grid.Column="1" Grid.Row="1" TextWrapping="Wrap"
+                                         Text="{Binding Path=LinkOnStore, Mode=TwoWay}"/>
+                            </Grid>
+                        </GroupBox>
+                    </StackPanel>
+
                     <GroupBox Header="Channels">
-                        
-                    </GroupBox>
-                    <GroupBox Header="Store Info" BorderBrush="Teal">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="2*"/>
-                            </Grid.ColumnDefinitions>
 
-                            <Label Grid.Column="0" HorizontalAlignment="Right">Name</Label>
-                            <TextBox Grid.Column="1" Height="24" VerticalAlignment="Top"/>
-                            <Label Grid.Column="2" HorizontalAlignment="Right">Link</Label>
-                            <TextBox Grid.Column="3" TextWrapping="Wrap" Height="48" VerticalAlignment="Top"></TextBox>
-                        </Grid>
                     </GroupBox>
                     <GroupBox Header="Tags"/>
                     <GroupBox Header="Characters"/>
@@ -60,7 +75,7 @@
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="6">
-                    <Button Content="Create" Background="RoyalBlue" Foreground="White" BorderThickness="0" Padding="6" Click="BtnCreateChannelInfo" />
+                    <Button Content="Create" Background="RoyalBlue" Foreground="White" BorderThickness="0" Padding="6" Click="BtnCreateApp" />
                     <Button Content="Update" Background="RoyalBlue" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0" />
                     <Button Content="Export JSON" Background="Green" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0" />
                     <Button Content="Batch Build" Background="Teal" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0"/>

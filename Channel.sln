@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseApp", "YoutubeVideoSampleWP80\BaseApp.csproj", "{708843E7-7173-4532-B7A6-DF2406FF3B5F}"
 EndProject
@@ -14,15 +14,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8516E3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebService", "WebService\WebService.csproj", "{9A75D764-618B-4AD4-83F8-30B288ADD8BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackEndApp", "BackEndApp\BackEndApp.csproj", "{2C67A5AC-5969-48CF-814D-1E24F7293C5E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendApp", "BackEndApp\BackendApp.csproj", "{2C67A5AC-5969-48CF-814D-1E24F7293C5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
 		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
@@ -32,6 +34,7 @@ Global
 		{708843E7-7173-4532-B7A6-DF2406FF3B5F}.Debug|ARM.ActiveCfg = Debug|ARM
 		{708843E7-7173-4532-B7A6-DF2406FF3B5F}.Debug|ARM.Build.0 = Debug|ARM
 		{708843E7-7173-4532-B7A6-DF2406FF3B5F}.Debug|ARM.Deploy.0 = Debug|ARM
+		{708843E7-7173-4532-B7A6-DF2406FF3B5F}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{708843E7-7173-4532-B7A6-DF2406FF3B5F}.Debug|x86.ActiveCfg = Debug|x86
 		{708843E7-7173-4532-B7A6-DF2406FF3B5F}.Debug|x86.Build.0 = Debug|x86
 		{708843E7-7173-4532-B7A6-DF2406FF3B5F}.Debug|x86.Deploy.0 = Debug|x86
@@ -41,24 +44,29 @@ Global
 		{708843E7-7173-4532-B7A6-DF2406FF3B5F}.Release|ARM.ActiveCfg = Release|ARM
 		{708843E7-7173-4532-B7A6-DF2406FF3B5F}.Release|ARM.Build.0 = Release|ARM
 		{708843E7-7173-4532-B7A6-DF2406FF3B5F}.Release|ARM.Deploy.0 = Release|ARM
+		{708843E7-7173-4532-B7A6-DF2406FF3B5F}.Release|x64.ActiveCfg = Release|Any CPU
 		{708843E7-7173-4532-B7A6-DF2406FF3B5F}.Release|x86.ActiveCfg = Release|x86
 		{708843E7-7173-4532-B7A6-DF2406FF3B5F}.Release|x86.Build.0 = Release|x86
 		{708843E7-7173-4532-B7A6-DF2406FF3B5F}.Release|x86.Deploy.0 = Release|x86
 		{9A75D764-618B-4AD4-83F8-30B288ADD8BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9A75D764-618B-4AD4-83F8-30B288ADD8BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A75D764-618B-4AD4-83F8-30B288ADD8BD}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{9A75D764-618B-4AD4-83F8-30B288ADD8BD}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{9A75D764-618B-4AD4-83F8-30B288ADD8BD}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{9A75D764-618B-4AD4-83F8-30B288ADD8BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A75D764-618B-4AD4-83F8-30B288ADD8BD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9A75D764-618B-4AD4-83F8-30B288ADD8BD}.Release|ARM.ActiveCfg = Release|Any CPU
+		{9A75D764-618B-4AD4-83F8-30B288ADD8BD}.Release|x64.ActiveCfg = Release|Any CPU
 		{9A75D764-618B-4AD4-83F8-30B288ADD8BD}.Release|x86.ActiveCfg = Release|Any CPU
 		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Release|ARM.ActiveCfg = Release|Any CPU
+		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Release|x64.ActiveCfg = Release|Any CPU
 		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution

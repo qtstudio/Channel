@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="643bfd6c553f47278a477e5270961693" Name="Diagram1">
+        <EntityTypeShape EntityType="ChannelDBModel.AppAd" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChannelDBModel.AppChannel" Width="1.5" PointX="8.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChannelDBModel.AppImage" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChannelDBModel.AppInfo" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChannelDBModel.AppTag" Width="1.5" PointX="8.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChannelDBModel.Channel" Width="1.5" PointX="6" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChannelDBModel.Character" Width="1.5" PointX="6" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChannelDBModel.CharacterApp" Width="1.5" PointX="8.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChannelDBModel.CharacterTag" Width="1.5" PointX="11.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChannelDBModel.ColorScheme" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChannelDBModel.Tag" Width="1.5" PointX="6" PointY="1.875" IsExpanded="true" />
+        <AssociationConnector Association="ChannelDBModel.FK_AppAds_App" ManuallyRouted="false" />
+        <AssociationConnector Association="ChannelDBModel.FK_AppChannel_App" ManuallyRouted="false" />
+        <AssociationConnector Association="ChannelDBModel.FK_AppChannel_Channel" ManuallyRouted="false" />
+        <AssociationConnector Association="ChannelDBModel.FK_AppImage_AppInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="ChannelDBModel.FK_AppInfo_ColorSchemeId" ManuallyRouted="false" />
+        <AssociationConnector Association="ChannelDBModel.FK_AppTag_App" ManuallyRouted="false" />
+        <AssociationConnector Association="ChannelDBModel.FK_CharacterApp_App" ManuallyRouted="false" />
+        <AssociationConnector Association="ChannelDBModel.FK_AppTag_Tag" ManuallyRouted="false" />
+        <AssociationConnector Association="ChannelDBModel.FK_CharacterApp_Character" ManuallyRouted="false" />
+        <AssociationConnector Association="ChannelDBModel.FK_CharacterTag_Character" ManuallyRouted="false" />
+        <AssociationConnector Association="ChannelDBModel.FK_CharacterTag_Tag" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

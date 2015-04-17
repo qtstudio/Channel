@@ -1,8 +1,10 @@
-﻿<Application x:Class="BackEndApp.App"
+﻿<Application x:Class="BackendApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:app="clr-namespace:BackendApp.Models.App"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <app:AppDataViewModel x:Key="AppDataViewModel" />
     </Application.Resources>
+
 </Application>

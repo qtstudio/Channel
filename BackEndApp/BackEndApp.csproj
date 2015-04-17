@@ -77,6 +77,56 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AppAd.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppChannel.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppImage.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppInfo.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppTag.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Channel.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChannelDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChannelDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChannelDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChannelDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChannelDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Character.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CharacterApp.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CharacterTag.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ColorScheme.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\App\AppDataViewModel.cs" />
+    <Compile Include="Models\App\AppSharedViewModel.cs" />
+    <Compile Include="Tag.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -84,21 +134,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ChannelModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ChannelModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ChannelModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ChannelModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ChannelModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ChannelModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -123,22 +158,22 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="ChannelModel.edmx">
+    <EntityDeploy Include="ChannelDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ChannelModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ChannelDBModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ChannelModel.Context.tt">
+    <None Include="ChannelDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ChannelModel.edmx</DependentUpon>
-      <LastGenOutput>ChannelModel.Context.cs</LastGenOutput>
+      <DependentUpon>ChannelDBModel.edmx</DependentUpon>
+      <LastGenOutput>ChannelDBModel.Context.cs</LastGenOutput>
     </None>
-    <None Include="ChannelModel.edmx.diagram">
-      <DependentUpon>ChannelModel.edmx</DependentUpon>
+    <None Include="ChannelDBModel.edmx.diagram">
+      <DependentUpon>ChannelDBModel.edmx</DependentUpon>
     </None>
-    <None Include="ChannelModel.tt">
+    <None Include="ChannelDBModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ChannelModel.edmx</DependentUpon>
-      <LastGenOutput>ChannelModel.cs</LastGenOutput>
+      <DependentUpon>ChannelDBModel.edmx</DependentUpon>
+      <LastGenOutput>ChannelDBModel.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

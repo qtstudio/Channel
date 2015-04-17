@@ -1,26 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using BackendApp.Models.App;
 
-namespace BackEndApp
+namespace BackendApp
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly QTDatabaseEntities _qtDatabaseEntities = new QTDatabaseEntities();
+        private readonly ChannelDBEntities _channelDbEntities = new ChannelDBEntities();
         public MainWindow()
         {
             InitializeComponent();
@@ -42,9 +30,21 @@ namespace BackEndApp
             si.Close();
         }
 
-        private void BtnCreateChannelInfo(object sender, RoutedEventArgs e)
+        private void BtnCreateApp(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(_qtDatabaseEntities.Tests.First().tang);
+            var viewModel = AppInfoView.DataContext as AppDataViewModel;
+            if (viewModel == null) return;
+
+
+            _channelDbEntities.AppInfoes.Add(new AppInfo
+            {
+                Name = viewModel.AppSharedViewModel.Name,
+                LongDesc = viewModel.AppSharedViewModel.LongDesc,
+                ShortDesc = viewModel.AppSharedViewModel.ShortDesc,
+                NameOnStore = viewModel.AppSharedViewModel.NameOnStore,
+                LinkOnStore = viewModel.AppSharedViewModel.LinkOnStore
+            });
+            _channelDbEntities.SaveChanges();
             //_qtDatabaseEntities.ChannelAppConfigs.Add(new ChannelAppConfig
             //{
             //    ChannelId = "test",

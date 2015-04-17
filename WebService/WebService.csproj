@@ -146,31 +146,65 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppAd.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppChannel.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppImage.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppInfo.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppTag.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="ChannelModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ChannelModel.Context.tt</DependentUpon>
+    <Compile Include="Channel.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ChannelModel.cs">
+    <Compile Include="ChannelDBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ChannelModel.tt</DependentUpon>
+      <DependentUpon>ChannelDBModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ChannelModel.Designer.cs">
+    <Compile Include="ChannelDBModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ChannelModel.edmx</DependentUpon>
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChannelDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChannelDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Character.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CharacterApp.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CharacterTag.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ColorScheme.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\App\AppSharedViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tag.cs">
+      <DependentUpon>ChannelDBModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\ChannelDB.mdf" />
@@ -233,22 +267,22 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <EntityDeploy Include="ChannelModel.edmx">
+    <EntityDeploy Include="ChannelDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ChannelModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ChannelDBModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="ChannelModel.Context.tt">
+    <Content Include="ChannelDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ChannelModel.edmx</DependentUpon>
-      <LastGenOutput>ChannelModel.Context.cs</LastGenOutput>
+      <DependentUpon>ChannelDBModel.edmx</DependentUpon>
+      <LastGenOutput>ChannelDBModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="ChannelModel.edmx.diagram">
-      <DependentUpon>ChannelModel.edmx</DependentUpon>
+    <Content Include="ChannelDBModel.edmx.diagram">
+      <DependentUpon>ChannelDBModel.edmx</DependentUpon>
     </Content>
-    <Content Include="ChannelModel.tt">
+    <Content Include="ChannelDBModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ChannelModel.edmx</DependentUpon>
-      <LastGenOutput>ChannelModel.cs</LastGenOutput>
+      <DependentUpon>ChannelDBModel.edmx</DependentUpon>
+      <LastGenOutput>ChannelDBModel.cs</LastGenOutput>
     </Content>
     <None Include="Properties\PublishProfiles\tangnv - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\tangnv - Web Deploy.pubxml" />
@@ -295,9 +329,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

@@ -1,0 +1,756 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ChannelDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppAds">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppId" Type="int" />
+          <Property Name="AdsToken" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AdsNetwork" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppChannel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppId" Type="int" />
+          <Property Name="ChannelID" Type="int" />
+        </EntityType>
+        <EntityType Name="AppImage">
+          <Key>
+            <PropertyRef Name="AppId" />
+          </Key>
+          <Property Name="AppId" Type="int" Nullable="false" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="50" />
+          <Property Name="PromotionLarge" Type="nvarchar" MaxLength="50" />
+          <Property Name="PromotionSmall" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AppInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ColorSchemeId" Type="int" />
+          <Property Name="NameOnStore" Type="nvarchar" MaxLength="50" />
+          <Property Name="LinkOnStore" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShortDesc" Type="nvarchar" MaxLength="50" />
+          <Property Name="LongDesc" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="AppTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AppId" Type="int" />
+          <Property Name="TagId" Type="int" />
+        </EntityType>
+        <EntityType Name="Channel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChannelId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Token" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TypeData" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Character">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nickname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="CharacterApp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CharacterId" Type="int" />
+          <Property Name="AppId" Type="int" />
+        </EntityType>
+        <EntityType Name="CharacterTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CharacterId" Type="int" />
+          <Property Name="TagId" Type="int" />
+        </EntityType>
+        <EntityType Name="ColorScheme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NormalColor" Type="nchar" MaxLength="8" />
+          <Property Name="NormalTextColor" Type="nchar" MaxLength="8" />
+          <Property Name="DarkColor" Type="nchar" MaxLength="8" />
+          <Property Name="DarkTextColor" Type="nchar" MaxLength="8" />
+          <Property Name="LightColor" Type="nchar" MaxLength="8" />
+          <Property Name="LightTextColor" Type="nchar" MaxLength="8" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_AppAds_App">
+          <End Role="AppInfo" Type="Self.AppInfo" Multiplicity="0..1" />
+          <End Role="AppAds" Type="Self.AppAds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppAds">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppChannel_App">
+          <End Role="AppInfo" Type="Self.AppInfo" Multiplicity="0..1" />
+          <End Role="AppChannel" Type="Self.AppChannel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppChannel">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppChannel_Channel">
+          <End Role="Channel" Type="Self.Channel" Multiplicity="0..1" />
+          <End Role="AppChannel" Type="Self.AppChannel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppChannel">
+              <PropertyRef Name="ChannelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppImage_AppInfo">
+          <End Role="AppInfo" Type="Self.AppInfo" Multiplicity="1" />
+          <End Role="AppImage" Type="Self.AppImage" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AppInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppImage">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppInfo_ColorSchemeId">
+          <End Role="ColorScheme" Type="Self.ColorScheme" Multiplicity="0..1" />
+          <End Role="AppInfo" Type="Self.AppInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ColorScheme">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppInfo">
+              <PropertyRef Name="ColorSchemeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppTag_App">
+          <End Role="AppInfo" Type="Self.AppInfo" Multiplicity="0..1" />
+          <End Role="AppTag" Type="Self.AppTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppTag">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppTag_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
+          <End Role="AppTag" Type="Self.AppTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppTag">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CharacterApp_App">
+          <End Role="AppInfo" Type="Self.AppInfo" Multiplicity="0..1" />
+          <End Role="CharacterApp" Type="Self.CharacterApp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CharacterApp">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CharacterApp_Character">
+          <End Role="Character" Type="Self.Character" Multiplicity="0..1" />
+          <End Role="CharacterApp" Type="Self.CharacterApp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Character">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CharacterApp">
+              <PropertyRef Name="CharacterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CharacterTag_Character">
+          <End Role="Character" Type="Self.Character" Multiplicity="0..1" />
+          <End Role="CharacterTag" Type="Self.CharacterTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Character">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CharacterTag">
+              <PropertyRef Name="CharacterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CharacterTag_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
+          <End Role="CharacterTag" Type="Self.CharacterTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CharacterTag">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ChannelDBModelStoreContainer">
+          <EntitySet Name="AppAds" EntityType="Self.AppAds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppChannel" EntityType="Self.AppChannel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppImage" EntityType="Self.AppImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppInfo" EntityType="Self.AppInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppTag" EntityType="Self.AppTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Channel" EntityType="Self.Channel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Character" EntityType="Self.Character" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CharacterApp" EntityType="Self.CharacterApp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CharacterTag" EntityType="Self.CharacterTag" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ColorScheme" EntityType="Self.ColorScheme" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AppAds_App" Association="Self.FK_AppAds_App">
+            <End Role="AppInfo" EntitySet="AppInfo" />
+            <End Role="AppAds" EntitySet="AppAds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppChannel_App" Association="Self.FK_AppChannel_App">
+            <End Role="AppInfo" EntitySet="AppInfo" />
+            <End Role="AppChannel" EntitySet="AppChannel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppChannel_Channel" Association="Self.FK_AppChannel_Channel">
+            <End Role="Channel" EntitySet="Channel" />
+            <End Role="AppChannel" EntitySet="AppChannel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppImage_AppInfo" Association="Self.FK_AppImage_AppInfo">
+            <End Role="AppInfo" EntitySet="AppInfo" />
+            <End Role="AppImage" EntitySet="AppImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppInfo_ColorSchemeId" Association="Self.FK_AppInfo_ColorSchemeId">
+            <End Role="ColorScheme" EntitySet="ColorScheme" />
+            <End Role="AppInfo" EntitySet="AppInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppTag_App" Association="Self.FK_AppTag_App">
+            <End Role="AppInfo" EntitySet="AppInfo" />
+            <End Role="AppTag" EntitySet="AppTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppTag_Tag" Association="Self.FK_AppTag_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="AppTag" EntitySet="AppTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CharacterApp_App" Association="Self.FK_CharacterApp_App">
+            <End Role="AppInfo" EntitySet="AppInfo" />
+            <End Role="CharacterApp" EntitySet="CharacterApp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CharacterApp_Character" Association="Self.FK_CharacterApp_Character">
+            <End Role="Character" EntitySet="Character" />
+            <End Role="CharacterApp" EntitySet="CharacterApp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CharacterTag_Character" Association="Self.FK_CharacterTag_Character">
+            <End Role="Character" EntitySet="Character" />
+            <End Role="CharacterTag" EntitySet="CharacterTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CharacterTag_Tag" Association="Self.FK_CharacterTag_Tag">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="CharacterTag" EntitySet="CharacterTag" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ChannelDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AppAd">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppId" Type="Int32" />
+          <Property Name="AdsToken" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AdsNetwork" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AppInfo" Relationship="Self.FK_AppAds_App" FromRole="AppAds" ToRole="AppInfo" />
+        </EntityType>
+        <EntityType Name="AppChannel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppId" Type="Int32" />
+          <Property Name="ChannelID" Type="Int32" />
+          <NavigationProperty Name="AppInfo" Relationship="Self.FK_AppChannel_App" FromRole="AppChannel" ToRole="AppInfo" />
+          <NavigationProperty Name="Channel" Relationship="Self.FK_AppChannel_Channel" FromRole="AppChannel" ToRole="Channel" />
+        </EntityType>
+        <EntityType Name="AppImage">
+          <Key>
+            <PropertyRef Name="AppId" />
+          </Key>
+          <Property Name="AppId" Type="Int32" Nullable="false" />
+          <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PromotionLarge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PromotionSmall" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AppInfo" Relationship="Self.FK_AppImage_AppInfo" FromRole="AppImage" ToRole="AppInfo" />
+        </EntityType>
+        <EntityType Name="AppInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ColorSchemeId" Type="Int32" />
+          <Property Name="NameOnStore" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LinkOnStore" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ShortDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LongDesc" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AppAds" Relationship="Self.FK_AppAds_App" FromRole="AppInfo" ToRole="AppAds" />
+          <NavigationProperty Name="AppChannels" Relationship="Self.FK_AppChannel_App" FromRole="AppInfo" ToRole="AppChannel" />
+          <NavigationProperty Name="AppImage" Relationship="Self.FK_AppImage_AppInfo" FromRole="AppInfo" ToRole="AppImage" />
+          <NavigationProperty Name="ColorScheme" Relationship="Self.FK_AppInfo_ColorSchemeId" FromRole="AppInfo" ToRole="ColorScheme" />
+          <NavigationProperty Name="AppTags" Relationship="Self.FK_AppTag_App" FromRole="AppInfo" ToRole="AppTag" />
+          <NavigationProperty Name="CharacterApps" Relationship="Self.FK_CharacterApp_App" FromRole="AppInfo" ToRole="CharacterApp" />
+        </EntityType>
+        <EntityType Name="AppTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppId" Type="Int32" />
+          <Property Name="TagId" Type="Int32" />
+          <NavigationProperty Name="AppInfo" Relationship="Self.FK_AppTag_App" FromRole="AppTag" ToRole="AppInfo" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK_AppTag_Tag" FromRole="AppTag" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="Channel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChannelId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Token" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeData" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AppChannels" Relationship="Self.FK_AppChannel_Channel" FromRole="Channel" ToRole="AppChannel" />
+        </EntityType>
+        <EntityType Name="Character">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nickname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CharacterApps" Relationship="Self.FK_CharacterApp_Character" FromRole="Character" ToRole="CharacterApp" />
+          <NavigationProperty Name="CharacterTags" Relationship="Self.FK_CharacterTag_Character" FromRole="Character" ToRole="CharacterTag" />
+        </EntityType>
+        <EntityType Name="CharacterApp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CharacterId" Type="Int32" />
+          <Property Name="AppId" Type="Int32" />
+          <NavigationProperty Name="AppInfo" Relationship="Self.FK_CharacterApp_App" FromRole="CharacterApp" ToRole="AppInfo" />
+          <NavigationProperty Name="Character" Relationship="Self.FK_CharacterApp_Character" FromRole="CharacterApp" ToRole="Character" />
+        </EntityType>
+        <EntityType Name="CharacterTag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CharacterId" Type="Int32" />
+          <Property Name="TagId" Type="Int32" />
+          <NavigationProperty Name="Character" Relationship="Self.FK_CharacterTag_Character" FromRole="CharacterTag" ToRole="Character" />
+          <NavigationProperty Name="Tag" Relationship="Self.FK_CharacterTag_Tag" FromRole="CharacterTag" ToRole="Tag" />
+        </EntityType>
+        <EntityType Name="ColorScheme">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NormalColor" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="NormalTextColor" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="DarkColor" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="DarkTextColor" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="LightColor" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <Property Name="LightTextColor" Type="String" MaxLength="8" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="AppInfoes" Relationship="Self.FK_AppInfo_ColorSchemeId" FromRole="ColorScheme" ToRole="AppInfo" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AppTags" Relationship="Self.FK_AppTag_Tag" FromRole="Tag" ToRole="AppTag" />
+          <NavigationProperty Name="CharacterTags" Relationship="Self.FK_CharacterTag_Tag" FromRole="Tag" ToRole="CharacterTag" />
+        </EntityType>
+        <Association Name="FK_AppAds_App">
+          <End Role="AppInfo" Type="Self.AppInfo" Multiplicity="0..1" />
+          <End Role="AppAds" Type="Self.AppAd" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppAds">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppChannel_App">
+          <End Role="AppInfo" Type="Self.AppInfo" Multiplicity="0..1" />
+          <End Role="AppChannel" Type="Self.AppChannel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppChannel">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppChannel_Channel">
+          <End Role="Channel" Type="Self.Channel" Multiplicity="0..1" />
+          <End Role="AppChannel" Type="Self.AppChannel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Channel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppChannel">
+              <PropertyRef Name="ChannelID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppImage_AppInfo">
+          <End Role="AppInfo" Type="Self.AppInfo" Multiplicity="1" />
+          <End Role="AppImage" Type="Self.AppImage" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AppInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppImage">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppInfo_ColorSchemeId">
+          <End Role="ColorScheme" Type="Self.ColorScheme" Multiplicity="0..1" />
+          <End Role="AppInfo" Type="Self.AppInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ColorScheme">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppInfo">
+              <PropertyRef Name="ColorSchemeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppTag_App">
+          <End Role="AppInfo" Type="Self.AppInfo" Multiplicity="0..1" />
+          <End Role="AppTag" Type="Self.AppTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppTag">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CharacterApp_App">
+          <End Role="AppInfo" Type="Self.AppInfo" Multiplicity="0..1" />
+          <End Role="CharacterApp" Type="Self.CharacterApp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CharacterApp">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppTag_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
+          <End Role="AppTag" Type="Self.AppTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AppTag">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CharacterApp_Character">
+          <End Role="Character" Type="Self.Character" Multiplicity="0..1" />
+          <End Role="CharacterApp" Type="Self.CharacterApp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Character">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CharacterApp">
+              <PropertyRef Name="CharacterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CharacterTag_Character">
+          <End Role="Character" Type="Self.Character" Multiplicity="0..1" />
+          <End Role="CharacterTag" Type="Self.CharacterTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Character">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CharacterTag">
+              <PropertyRef Name="CharacterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CharacterTag_Tag">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="0..1" />
+          <End Role="CharacterTag" Type="Self.CharacterTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CharacterTag">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ChannelDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppAds" EntityType="Self.AppAd" />
+          <EntitySet Name="AppChannels" EntityType="Self.AppChannel" />
+          <EntitySet Name="AppImages" EntityType="Self.AppImage" />
+          <EntitySet Name="AppInfoes" EntityType="Self.AppInfo" />
+          <EntitySet Name="AppTags" EntityType="Self.AppTag" />
+          <EntitySet Name="Channels" EntityType="Self.Channel" />
+          <EntitySet Name="Characters" EntityType="Self.Character" />
+          <EntitySet Name="CharacterApps" EntityType="Self.CharacterApp" />
+          <EntitySet Name="CharacterTags" EntityType="Self.CharacterTag" />
+          <EntitySet Name="ColorSchemes" EntityType="Self.ColorScheme" />
+          <EntitySet Name="Tags" EntityType="Self.Tag" />
+          <AssociationSet Name="FK_AppAds_App" Association="Self.FK_AppAds_App">
+            <End Role="AppInfo" EntitySet="AppInfoes" />
+            <End Role="AppAds" EntitySet="AppAds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppChannel_App" Association="Self.FK_AppChannel_App">
+            <End Role="AppInfo" EntitySet="AppInfoes" />
+            <End Role="AppChannel" EntitySet="AppChannels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppChannel_Channel" Association="Self.FK_AppChannel_Channel">
+            <End Role="Channel" EntitySet="Channels" />
+            <End Role="AppChannel" EntitySet="AppChannels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppImage_AppInfo" Association="Self.FK_AppImage_AppInfo">
+            <End Role="AppInfo" EntitySet="AppInfoes" />
+            <End Role="AppImage" EntitySet="AppImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppInfo_ColorSchemeId" Association="Self.FK_AppInfo_ColorSchemeId">
+            <End Role="ColorScheme" EntitySet="ColorSchemes" />
+            <End Role="AppInfo" EntitySet="AppInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppTag_App" Association="Self.FK_AppTag_App">
+            <End Role="AppInfo" EntitySet="AppInfoes" />
+            <End Role="AppTag" EntitySet="AppTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CharacterApp_App" Association="Self.FK_CharacterApp_App">
+            <End Role="AppInfo" EntitySet="AppInfoes" />
+            <End Role="CharacterApp" EntitySet="CharacterApps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppTag_Tag" Association="Self.FK_AppTag_Tag">
+            <End Role="Tag" EntitySet="Tags" />
+            <End Role="AppTag" EntitySet="AppTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CharacterApp_Character" Association="Self.FK_CharacterApp_Character">
+            <End Role="Character" EntitySet="Characters" />
+            <End Role="CharacterApp" EntitySet="CharacterApps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CharacterTag_Character" Association="Self.FK_CharacterTag_Character">
+            <End Role="Character" EntitySet="Characters" />
+            <End Role="CharacterTag" EntitySet="CharacterTags" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CharacterTag_Tag" Association="Self.FK_CharacterTag_Tag">
+            <End Role="Tag" EntitySet="Tags" />
+            <End Role="CharacterTag" EntitySet="CharacterTags" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ChannelDBModelStoreContainer" CdmEntityContainer="ChannelDBEntities">
+          <EntitySetMapping Name="AppAds">
+            <EntityTypeMapping TypeName="ChannelDBModel.AppAd">
+              <MappingFragment StoreEntitySet="AppAds">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="AdsToken" ColumnName="AdsToken" />
+                <ScalarProperty Name="AdsNetwork" ColumnName="AdsNetwork" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppChannels">
+            <EntityTypeMapping TypeName="ChannelDBModel.AppChannel">
+              <MappingFragment StoreEntitySet="AppChannel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="ChannelID" ColumnName="ChannelID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppImages">
+            <EntityTypeMapping TypeName="ChannelDBModel.AppImage">
+              <MappingFragment StoreEntitySet="AppImage">
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="PromotionLarge" ColumnName="PromotionLarge" />
+                <ScalarProperty Name="PromotionSmall" ColumnName="PromotionSmall" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppInfoes">
+            <EntityTypeMapping TypeName="ChannelDBModel.AppInfo">
+              <MappingFragment StoreEntitySet="AppInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ColorSchemeId" ColumnName="ColorSchemeId" />
+                <ScalarProperty Name="NameOnStore" ColumnName="NameOnStore" />
+                <ScalarProperty Name="LinkOnStore" ColumnName="LinkOnStore" />
+                <ScalarProperty Name="ShortDesc" ColumnName="ShortDesc" />
+                <ScalarProperty Name="LongDesc" ColumnName="LongDesc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppTags">
+            <EntityTypeMapping TypeName="ChannelDBModel.AppTag">
+              <MappingFragment StoreEntitySet="AppTag">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Channels">
+            <EntityTypeMapping TypeName="ChannelDBModel.Channel">
+              <MappingFragment StoreEntitySet="Channel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="TypeData" ColumnName="TypeData" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Characters">
+            <EntityTypeMapping TypeName="ChannelDBModel.Character">
+              <MappingFragment StoreEntitySet="Character">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CharacterApps">
+            <EntityTypeMapping TypeName="ChannelDBModel.CharacterApp">
+              <MappingFragment StoreEntitySet="CharacterApp">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CharacterId" ColumnName="CharacterId" />
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CharacterTags">
+            <EntityTypeMapping TypeName="ChannelDBModel.CharacterTag">
+              <MappingFragment StoreEntitySet="CharacterTag">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CharacterId" ColumnName="CharacterId" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ColorSchemes">
+            <EntityTypeMapping TypeName="ChannelDBModel.ColorScheme">
+              <MappingFragment StoreEntitySet="ColorScheme">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NormalColor" ColumnName="NormalColor" />
+                <ScalarProperty Name="NormalTextColor" ColumnName="NormalTextColor" />
+                <ScalarProperty Name="DarkColor" ColumnName="DarkColor" />
+                <ScalarProperty Name="DarkTextColor" ColumnName="DarkTextColor" />
+                <ScalarProperty Name="LightColor" ColumnName="LightColor" />
+                <ScalarProperty Name="LightTextColor" ColumnName="LightTextColor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="ChannelDBModel.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

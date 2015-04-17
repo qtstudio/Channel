@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 
 namespace WebService.Controllers
 {
     public class ValuesController : ApiController
     {
-        private readonly QTDatabaseEntities _qtDatabaseEntities = new QTDatabaseEntities();
+        private readonly ChannelDBEntities _channelDbEntities = new ChannelDBEntities();
         // GET api/values
         public IEnumerable<string> Get()
         {
