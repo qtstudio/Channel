@@ -14,11 +14,12 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
+
     <phone:PhoneApplicationPage.Resources>
         <!--<conv:ImgPathBlurConverter x:Key="ImgPathBlur" />-->
 
         <DataTemplate x:Key="VideoDataTemplate">
-            <Grid Margin="0,6" Height="96">
+            <Grid Margin="0,6" Height="108">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="2*"/>
@@ -85,7 +86,7 @@
     </phone:PhoneApplicationPage.Resources>
 
     <!--Data context is set to sample data above and LayoutRoot contains the root grid where all other page content is placed-->
-    <Grid x:Name="LayoutRoot" >
+    <Grid x:Name="LayoutRoot" DataContext="{StaticResource InterfaceViewModel}">
         <Grid.Background>
             <ImageBrush Stretch="UniformToFill" ImageSource="../Assets/Images/bgBlur.jpg" Opacity="0.3"/>
         </Grid.Background>
@@ -107,8 +108,8 @@
 
         <!--ContentPanel contains ListBox and ListBox ItemTemplate. Place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <phone:LongListSelector x:Name="ChannelVideos" SelectionChanged="VideosList_SelectionChanged" Visibility="Collapsed" ItemTemplate="{StaticResource VideoDataTemplate}"/>
-            <ProgressBar x:Name="ChannelProgress" Foreground="White" VerticalAlignment="Center" IsIndeterminate="True" />
+            <phone:LongListSelector x:Name="ChannelVideos" SelectionChanged="VideosList_SelectionChanged" ItemTemplate="{StaticResource VideoDataTemplate}"/>
+            <!--<ProgressBar x:Name="ChannelProgress" Foreground="White" VerticalAlignment="Center" IsIndeterminate="True" />-->
             <Grid VerticalAlignment="Bottom" Height="48">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -118,20 +119,22 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="0" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="GoPivotPage">
+                <!--<Border Grid.Column="0" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="GoPivotPage">
                     <Border.Background>
                         <SolidColorBrush Color="LightCyan"></SolidColorBrush>
                     </Border.Background>
                     <TextBlock Padding="0,6,0,0" Foreground="Black" FontSize="24" TextWrapping="Wrap" TextAlignment="Center" Text="Pivot" VerticalAlignment="Center" Height="48"/>
-                </Border>
-                <Border Grid.Column="1" Margin="6,0" CornerRadius="6,6,0,0"  MouseEnter="PreviousClick">
+                </Border>-->
+                <!--<Border Grid.Column="1" Margin="6,0" CornerRadius="6,6,0,0"  MouseEnter="PreviousClick">
                     <Border.Background>
                         <SolidColorBrush Color="DarkCyan"></SolidColorBrush>
-                        <!--<LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                        -->
+                <!--<LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
                             <GradientStop Color="#FF083232" Offset="0"/>
                             <GradientStop Color="#FF188085" Offset="0.5"/>
                             <GradientStop Color="#FFFFFBDE" Offset="1"/>
                         </LinearGradientBrush>-->
+                <!--
                     </Border.Background>
                     <Image Source="../Assets/Icons/Previous.png"/>
                 </Border>
@@ -140,16 +143,16 @@
                         <SolidColorBrush Color="LightCyan"></SolidColorBrush>
                     </Border.Background>
                     <TextBlock Padding="0,6,0,0" Foreground="Black" FontSize="24" TextWrapping="Wrap" TextAlignment="Center" Text="1" VerticalAlignment="Center" x:Name="CurrentPageXaml" Height="48"/>
-                </Border>
-                <Border Grid.Column="3" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="NextClick">
+                </Border>-->
+                <!--<Border Grid.Column="3" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="NextClick">
                     <Border.Background>
                         <SolidColorBrush Color="DarkCyan"></SolidColorBrush>
                     </Border.Background>
                     <Image Source="../Assets/Icons/Next.png"/>
-                </Border>
+                </Border>-->
                 <Border Grid.Column="4" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="SearchClick">
                     <Border.Background>
-                        <SolidColorBrush Color="DarkCyan"></SolidColorBrush>
+                        <SolidColorBrush Color="{Binding ColorSchemeViewModel.DarkColor}"></SolidColorBrush>
                     </Border.Background>
                     <Image Source="../Assets/Icons/Search.png"/>
                 </Border>
@@ -177,4 +180,7 @@
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="Indicator" IsVisible="True" IsIndeterminate="False"/>
+    </shell:SystemTray.ProgressIndicator>
 </phone:PhoneApplicationPage>

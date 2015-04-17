@@ -1,9 +1,17 @@
 ﻿{
-    "index": 1,
-    "maxResult": 10,
-    "channelId": "JackyPhanChanel",
-    "orderBy": "published",
-    "typeData": "rss",
-    "token": "AIzaSyDNRQKpwuOIdorBHisGMUgakC_hwvjD8l8",
-    "query": ""
+    "AppName": "Larva",
+    "Description": "This is Larva app",
+    "Channel": [
+        {
+            "ChannelId": "JackyPhanChanel",
+            "TypeData": "rss",
+            "Token": "AIzaSyDNRQKpwuOIdorBHisGMUgakC_hwvjD8l8"
+        }
+    ],
+    "ColorScheme": {
+        "LightColor": "FFE0FFFF",
+        "DarkColor": "FF008B8B",
+        "LightTextColor": "FF000000",
+        "DarkTextColor": "FFFFFFFF"
+    }
 }

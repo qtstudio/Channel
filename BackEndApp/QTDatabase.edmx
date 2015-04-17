@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QTDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ChannelAppConfig">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChannelId" Type="nvarchar" MaxLength="50" />
+          <Property Name="Query" Type="nvarchar" MaxLength="50" />
+          <Property Name="Index" Type="int" />
+          <Property Name="MaxResult" Type="int" />
+          <Property Name="Token" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeData" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrderBy" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="QTDatabaseModelStoreContainer">
+          <EntitySet Name="ChannelAppConfig" EntityType="Self.ChannelAppConfig" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QTDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ChannelAppConfig">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChannelId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Query" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Index" Type="Int32" />
+          <Property Name="MaxResult" Type="Int32" />
+          <Property Name="Token" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeData" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="QTDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ChannelAppConfigs" EntityType="Self.ChannelAppConfig" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QTDatabaseModelStoreContainer" CdmEntityContainer="QTDatabaseEntities">
+          <EntitySetMapping Name="ChannelAppConfigs">
+            <EntityTypeMapping TypeName="QTDatabaseModel.ChannelAppConfig">
+              <MappingFragment StoreEntitySet="ChannelAppConfig">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ChannelId" ColumnName="ChannelId" />
+                <ScalarProperty Name="Query" ColumnName="Query" />
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="MaxResult" ColumnName="MaxResult" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="TypeData" ColumnName="TypeData" />
+                <ScalarProperty Name="OrderBy" ColumnName="OrderBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

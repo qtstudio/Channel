@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubeVideoSampleWP80", "YoutubeVideoSampleWP80\YoutubeVideoSampleWP80.csproj", "{708843E7-7173-4532-B7A6-DF2406FF3B5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseApp", "YoutubeVideoSampleWP80\BaseApp.csproj", "{708843E7-7173-4532-B7A6-DF2406FF3B5F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8516E3D0-0B30-4675-A7C3-C1CF21CF73AE}"
 	ProjectSection(SolutionItems) = preProject
@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8516E3
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebService", "WebService\WebService.csproj", "{9A75D764-618B-4AD4-83F8-30B288ADD8BD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackEndApp", "BackEndApp\BackEndApp.csproj", "{2C67A5AC-5969-48CF-814D-1E24F7293C5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,6 +52,14 @@ Global
 		{9A75D764-618B-4AD4-83F8-30B288ADD8BD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9A75D764-618B-4AD4-83F8-30B288ADD8BD}.Release|ARM.ActiveCfg = Release|Any CPU
 		{9A75D764-618B-4AD4-83F8-30B288ADD8BD}.Release|x86.ActiveCfg = Release|Any CPU
+		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Release|ARM.ActiveCfg = Release|Any CPU
+		{2C67A5AC-5969-48CF-814D-1E24F7293C5E}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

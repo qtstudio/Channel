@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.IO.IsolatedStorage;
-using System.Resources;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
-using Windows.Storage;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using MyToolkit.Utilities;
 using Newtonsoft.Json;
 using YoutubeVideoSampleWP80.Model;
 using YoutubeVideoSampleWP80.Resources;
@@ -68,9 +65,9 @@ namespace YoutubeVideoSampleWP80
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
-        private void Application_Launching(object sender, LaunchingEventArgs e)
+        private async void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            LoadConfig();
+            await LoadConfig();
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -85,17 +82,17 @@ namespace YoutubeVideoSampleWP80
         {
         }
 
-        private async void LoadConfig()
+        private async Task LoadConfig()
         {
             // Get a file from the installation folder with the ms-appx URI scheme.
             //var fileStream = File.OpenRead("/Config/config.json");
-            StorageFile sFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(@"Config\config.json");
+            var sFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(@"Config\config.json");
 
             var fileStream = await sFile.OpenStreamForReadAsync();
             using (var streamReader = new StreamReader(fileStream))
             {
                 var content = streamReader.ReadToEnd();
-                Configuration = JsonConvert.DeserializeObject<Configuration>(content);
+                Configuration = Configuration.Parse(content);
             }
         }
         // Code to execute when the application is closing (eg, user hit Back)
