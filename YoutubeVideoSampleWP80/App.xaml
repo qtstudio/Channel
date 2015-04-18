@@ -9,8 +9,6 @@
     <!--Application Resources-->
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:YoutubeVideoSampleWP80" x:Key="LocalizedStrings"/>
-        <model:InterfaceViewModel x:Key="InterfaceViewModel" />
-        <model:ColorSchemeViewModel x:Key="ColorSchemeViewModel" />
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

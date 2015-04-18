@@ -86,7 +86,7 @@
     </phone:PhoneApplicationPage.Resources>
 
     <!--Data context is set to sample data above and LayoutRoot contains the root grid where all other page content is placed-->
-    <Grid x:Name="LayoutRoot" DataContext="{StaticResource InterfaceViewModel}">
+    <Grid x:Name="LayoutRoot">
         <Grid.Background>
             <ImageBrush Stretch="UniformToFill" ImageSource="../Assets/Images/bgBlur.jpg" Opacity="0.3"/>
         </Grid.Background>
@@ -152,7 +152,7 @@
                 </Border>-->
                 <Border Grid.Column="4" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="SearchClick">
                     <Border.Background>
-                        <SolidColorBrush Color="{Binding ColorSchemeViewModel.DarkColor}"></SolidColorBrush>
+                        <SolidColorBrush Color="DarkCyan"></SolidColorBrush>
                     </Border.Background>
                     <Image Source="../Assets/Icons/Search.png"/>
                 </Border>
