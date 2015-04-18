@@ -18,9 +18,24 @@ namespace YoutubeVideoSampleWP80.View
 {
     public partial class MainPage
     {
-        private readonly Configuration _configuration;
+        private readonly Configuration _configuration  = ((App)Application.Current).Configuration; 
         private readonly DetectorLongList _detectorLongList;
 
+        private int _maxResult = 10;
+        private string _orderBy = "published";
+        private int _index = 1;
+        private string _query = "";
+
+        public MainPage()
+        {
+            DataContext = InterfaceViewModel;
+            InitializeComponent();
+            FeedbackOverlay.VisibilityChanged += FeedbackOverlay_VisibilityChanged;
+            
+            _detectorLongList = new DetectorLongList();
+            _detectorLongList.Compression += GetMoreVideos;
+            _detectorLongList.Bind(ChannelVideos);
+        }
         public InterfaceViewModel InterfaceViewModel
         {
             get { return _configuration.InterfaceViewModel; }
@@ -35,32 +50,11 @@ namespace YoutubeVideoSampleWP80.View
             get { return _configuration.ChannelViewModel; }
         }
 
-
-        //public int TotalPage = 1;
-        //public int TotalResults;
-        //public int CurrentPage = 1;
-
-        private int MaxResult = 10;
-        private string _orderBy = "published";
-        private int _index = 1;
-        private string _query = "";
-
-        public MainPage()
-        {
-            DataContext = InterfaceViewModel;
-            InitializeComponent();
-            FeedbackOverlay.VisibilityChanged += FeedbackOverlay_VisibilityChanged;
-            _configuration = ((App)Application.Current).Configuration;
-            _detectorLongList = new DetectorLongList();
-            _detectorLongList.Compression += GetMoreVideos;
-            _detectorLongList.Bind(ChannelVideos);
-        }
-
         private async void GetMoreVideos(object sender, CompressionEventArgs compressionEventArgs)
         {
             if (compressionEventArgs.Type == CompressionType.Bottom)
             {
-                _index += MaxResult;
+                _index += _maxResult;
                 await GetDataForList("Loading more videos...");
             }
         }
@@ -82,8 +76,8 @@ namespace YoutubeVideoSampleWP80.View
                     }
 
                     await GetDataForList("Loading videos...");
-
-                    //TotalPage = (int)Math.Ceiling((double)TotalResults / _configuration.MaxResult);
+                    Indicator.Text = "";
+                    Indicator.IsIndeterminate = false;
                 }
                 else
                 {
@@ -109,7 +103,7 @@ namespace YoutubeVideoSampleWP80.View
                 await
                     GetYoutubeChannel("http://gdata.youtube.com/feeds/api/users/" + channelInfo.ChannelId +
                                       "/uploads?alt=" + channelInfo.TypeData + "&v=2&orderby=" + _orderBy + "&start-index=" + _index +
-                                      "&max-results=" + MaxResult + (string.IsNullOrEmpty(_query) ? "" : ("&q=" + _query)));
+                                      "&max-results=" + _maxResult + (string.IsNullOrEmpty(_query) ? "" : ("&q=" + _query)));
             if (ChannelVideos.ItemsSource == null)
                 ChannelVideos.ItemsSource = channelVideos;
             else
@@ -121,9 +115,7 @@ namespace YoutubeVideoSampleWP80.View
                 }
                 _detectorLongList.Bind(ChannelVideos);
             }
-
-            Indicator.Text = "";
-            Indicator.IsIndeterminate = false;
+            
         }
 
         private async Task<List<YoutubeVideo>> GetYoutubeChannel(string url)

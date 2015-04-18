@@ -5,16 +5,16 @@ namespace YoutubeVideoSampleWP80.Model
 {
     public class ColorSchemeViewModel : INotifyPropertyChanged
     {
-        private Color darkColor;
+        private Color _darkColor;
 
         public Color DarkColor
         {
-            get { return darkColor; }
+            get { return _darkColor; }
             set
             {
                 // Only update value if it changed
-                if (value == darkColor) return;
-                darkColor = value;
+                if (value == _darkColor) return;
+                _darkColor = value;
 
                 // Call NotifyPropertyChanged when the property is updated
                 NotifyPropertyChanged("DarkColor");
