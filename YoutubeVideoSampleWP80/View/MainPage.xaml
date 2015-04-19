@@ -91,23 +91,32 @@
         <phone:Panorama>
             <phone:Panorama.TitleTemplate>
                 <DataTemplate>
-                    <Grid x:Name="TitlePanel" Height="96">
-                        <Grid.ColumnDefinitions>
+                    <Grid Height="96">
+                        <!--<Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="3*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Source="/larva2.png"/>
-                        <Image Grid.Column="1" Source="/Assets/Images/title.png" Stretch="Uniform"></Image>
+                        <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Source="/larva2.png"/>-->
+                        <Image Source="/Assets/Images/title.png" Stretch="Uniform"></Image>
                     </Grid>
                 </DataTemplate>
             </phone:Panorama.TitleTemplate>
-            <!--Panorama item one-->
-            <phone:PanoramaItem Header="videos">
-                <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 
-                    <Grid.Background>
-                        <ImageBrush Stretch="UniformToFill" ImageSource="../Assets/Images/bgBlur.jpg" Opacity="0.3"/>
-                    </Grid.Background>
+            <phone:Panorama.HeaderTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,24,0,-24">
+                        <TextBlock Text="{Binding}" FontSize="48" FontFamily="Georgia"/>
+                    </Grid>
+                </DataTemplate>
+            </phone:Panorama.HeaderTemplate>
+
+            <phone:Panorama.Background>
+                <ImageBrush Stretch="UniformToFill" ImageSource="../Assets/Images/bgBlur_2.jpg" Opacity="0.3"/>
+            </phone:Panorama.Background>
+
+            <!--Panorama item one-->
+            <phone:PanoramaItem Header="Videos">
+                <Grid x:Name="ContentPanel" Margin="12,0,12,0">
                     <phone:LongListSelector x:Name="ChannelVideos" SelectionChanged="VideosList_SelectionChanged" ItemTemplate="{StaticResource VideoDataTemplate}"/>
                 </Grid>
 
@@ -115,7 +124,7 @@
             </phone:PanoramaItem>
 
             <!--Panorama item two-->
-            <phone:PanoramaItem Header="info">
+            <phone:PanoramaItem Header="Characters">
                 <Grid/>
             </phone:PanoramaItem>
         </phone:Panorama>

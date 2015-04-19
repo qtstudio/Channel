@@ -122,8 +122,11 @@
     <Compile Include="ColorScheme.cs">
       <DependentUpon>ChannelDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\App\AppDataGridVo.cs" />
     <Compile Include="Models\App\AppDataViewModel.cs" />
     <Compile Include="Models\App\AppSharedViewModel.cs" />
+    <Compile Include="Models\DataGridVo.cs" />
+    <Compile Include="Models\SharedViewModel.cs" />
     <Compile Include="Tag.cs">
       <DependentUpon>ChannelDBModel.tt</DependentUpon>
     </Compile>

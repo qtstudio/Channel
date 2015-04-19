@@ -14,13 +14,30 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
 
-                <ListBox Grid.Column="0" Grid.Row="0" />
+                <ListBox x:Name="ListBox" ItemsSource="{Binding}" SelectionChanged="ListBox_OnSelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Path=Name}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                
+                <!--<ListView Grid.Column="0" Grid.Row="0" x:Name="ListView" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Path=DataGrid}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name, Mode=TwoWay}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>-->
                 <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0.6">
-                    <Button Content="Export JSON" Background="Green"  Foreground="White" BorderThickness="0" Padding="6" />
+                    <Button Content="Refresh" Background="RoyalBlue"  Foreground="White" BorderThickness="0" Padding="6" Click="BtnRefreshAppInfoGrid" />
+                    <Button Content="Export JSON" Background="Green"  Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0"/>
                     <Button Content="Batch Build" Background="RoyalBlue" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0" Click="BtnBuildAllApp"/>
                 </StackPanel>
                 <StackPanel x:Name="AppInfoView" Grid.Column="1" Grid.Row="0" Orientation="Vertical" Margin="6" DataContext="{StaticResource AppDataViewModel}">
-                    <StackPanel DataContext="{Binding Path=AppSharedViewModel}">
+                    <StackPanel DataContext="{Binding Path=AppSharedViewModel, Mode=TwoWay}">
                         <GroupBox Header="Basic Info" BorderBrush="CornflowerBlue">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -76,7 +93,7 @@
 
                 <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="6">
                     <Button Content="Create" Background="RoyalBlue" Foreground="White" BorderThickness="0" Padding="6" Click="BtnCreateApp" />
-                    <Button Content="Update" Background="RoyalBlue" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0" />
+                    <Button Content="Update" Background="RoyalBlue" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0" Click="BtnUpdateApp"/>
                     <Button Content="Export JSON" Background="Green" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0" />
                     <Button Content="Batch Build" Background="Teal" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0"/>
                 </StackPanel>

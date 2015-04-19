@@ -6,6 +6,7 @@
         {
             AppSharedViewModel = new AppSharedViewModel();
         }
+
         public AppSharedViewModel AppSharedViewModel { get; set; }
     }
 }

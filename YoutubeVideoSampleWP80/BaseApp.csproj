@@ -162,6 +162,7 @@
     <Content Include="Assets\Images\back.png" />
     <Content Include="Assets\Images\bg.jpg" />
     <Content Include="Assets\Images\bgBlur.jpg" />
+    <Content Include="Assets\Images\bgBlur_2.jpg" />
     <Content Include="Assets\Images\feature.search.png" />
     <Content Include="Assets\Images\next.png" />
     <Content Include="Assets\Images\title.png" />

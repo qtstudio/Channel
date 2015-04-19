@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using BackendApp.Models.App;
 
 namespace BackendApp
@@ -33,8 +36,13 @@ namespace BackendApp
         private void BtnCreateApp(object sender, RoutedEventArgs e)
         {
             var viewModel = AppInfoView.DataContext as AppDataViewModel;
-            if (viewModel == null) return;
+            if (viewModel == null || viewModel.AppSharedViewModel == null) return;
 
+            if (_channelDbEntities.AppInfoes.Any(o => o.Name == viewModel.AppSharedViewModel.Name))
+            {
+                MessageBox.Show("Duplicate name");
+                return;
+            }
 
             _channelDbEntities.AppInfoes.Add(new AppInfo
             {
@@ -45,19 +53,77 @@ namespace BackendApp
                 LinkOnStore = viewModel.AppSharedViewModel.LinkOnStore
             });
             _channelDbEntities.SaveChanges();
-            //_qtDatabaseEntities.ChannelAppConfigs.Add(new ChannelAppConfig
-            //{
-            //    ChannelId = "test",
-            //    Index = 1,
-            //    MaxResult = 10,
-            //    OrderBy = "published",
-            //    Query = "",
-            //    TypeData = "rss"
-            //});
-            //_qtDatabaseEntities.SaveChanges();
-            //MessageBox.Show("Create successfully!");
+            ReloadGrid();
+        }
 
-            //_qtDatabaseEntities.ChannelAppConfigs.ToList();
+        private void BtnRefreshAppInfoGrid(object sender, RoutedEventArgs e)
+        {
+            ReloadGrid();
+        }
+
+        void ReloadGrid()
+        {
+            ListBox.ItemsSource = _channelDbEntities.AppInfoes.Select(o => new AppDataGridVo
+            {
+                Id = o.Id,
+                Name = o.Name
+            }).ToList();
+        }
+
+        private void ListBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count <= 0) return;
+
+            var addedItem = e.AddedItems[0] as AppDataGridVo;
+            if (addedItem == null) return;
+
+            var selectedEntity = _channelDbEntities.AppInfoes.FirstOrDefault(o => o.Id == addedItem.Id);
+            if (selectedEntity == null) return;
+
+            AppInfoView.DataContext = new AppDataViewModel
+            {
+                AppSharedViewModel = new AppSharedViewModel
+                {
+                    Id = selectedEntity.Id,
+                    Name = selectedEntity.Name,
+                    ShortDesc = selectedEntity.ShortDesc,
+                    LongDesc = selectedEntity.LongDesc,
+                    NameOnStore = selectedEntity.NameOnStore,
+                    LinkOnStore = selectedEntity.LinkOnStore
+                }
+            };
+        }
+
+        private void BtnUpdateApp(object sender, RoutedEventArgs e)
+        {
+            var viewModel = AppInfoView.DataContext as AppDataViewModel;
+            if (viewModel == null || viewModel.AppSharedViewModel == null) return;
+
+            var sharedViewModel = viewModel.AppSharedViewModel;
+
+            var entity = _channelDbEntities.AppInfoes.FirstOrDefault(o => o.Id == sharedViewModel.Id);
+
+            if (entity == null)
+            {
+                MessageBox.Show("App Info is not existed");
+                return;
+            }
+
+            if (_channelDbEntities.AppInfoes.Any(o => o.Name == sharedViewModel.Name && o.Id != sharedViewModel.Id))
+            {
+                MessageBox.Show("Duplicate name.");
+                return;
+            }
+
+            entity.Name = sharedViewModel.Name;
+            entity.LongDesc = sharedViewModel.LongDesc;
+            entity.ShortDesc = sharedViewModel.ShortDesc;
+            entity.NameOnStore = sharedViewModel.NameOnStore;
+            entity.LinkOnStore = sharedViewModel.LinkOnStore;
+
+            _channelDbEntities.SaveChanges();
+
+            ReloadGrid();
         }
     }
 }
