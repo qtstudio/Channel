@@ -1,0 +1,22 @@
+﻿<Application
+    x:Class="BaseApp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:local="clr-namespace:BaseApp"
+    xmlns:model="clr-namespace:BaseApp.Model">
+
+    <!--Application Resources-->
+    <Application.Resources>
+        <local:LocalizedStrings x:Key="LocalizedStrings"/>
+        <model:PromotionViewModel x:Key="PromotionViewModel"/>
+    </Application.Resources>
+
+    <Application.ApplicationLifetimeObjects>
+        <!--Required object that handles lifetime events for the application-->
+        <shell:PhoneApplicationService
+            Launching="Application_Launching" Closing="Application_Closing"
+            Activated="Application_Activated" Deactivated="Application_Deactivated"/>
+    </Application.ApplicationLifetimeObjects>
+
+</Application>

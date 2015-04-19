@@ -7,8 +7,8 @@
     <ProjectGuid>{2C67A5AC-5969-48CF-814D-1E24F7293C5E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BackEndApp</RootNamespace>
-    <AssemblyName>BackEndApp</AssemblyName>
+    <RootNamespace>BackendApp</RootNamespace>
+    <AssemblyName>BackendApp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

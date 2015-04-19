@@ -1,0 +1,200 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="BaseApp.View.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:rma="clr-namespace:RateMyApp.Controls;assembly=RateMyApp"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <phone:PhoneApplicationPage.Resources>
+        <!--<conv:ImgPathBlurConverter x:Key="ImgPathBlur" />-->
+
+        <DataTemplate x:Key="VideoDataTemplate">
+            <Grid Margin="0,6" Height="108">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Grid.ColumnSpan="2" Canvas.ZIndex="-1" Background="{StaticResource PhoneBackgroundBrush}" Width="Auto" Height="Auto" CornerRadius="6"></Border>
+                <Border Grid.Column="0" Width="Auto" Height="Auto" CornerRadius="6,0,0,6">
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding Thumbnail}" Stretch="UniformToFill" />
+                    </Border.Background>
+                </Border>
+                <!--Background="{Binding Converter={StaticResource RowColour}}"-->
+                <Border Grid.Column="1" Width="Auto" Height="Auto" CornerRadius="0,6,6,0">
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding BlurBgSource, Mode=OneWay}" Stretch="UniformToFill" Opacity="0.5" />
+                    </Border.Background>
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Foreground="#FF4BDFE6" FontSize="18" Text="{Binding Title}" TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center" FontFamily="Georgia" FontWeight="Bold" TextTrimming="WordEllipsis" MaxHeight="60"/>
+                        <Grid Grid.Row="1" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="/Assets/Icons/viewCount.png" Stretch="Uniform" Opacity="0.85"/>
+                            <TextBlock Grid.Column="1" FontSize="16" Text="{Binding ViewCount, StringFormat=N0}" Foreground="#AAFFFFFF" VerticalAlignment="Center" FontFamily="Meiryo UI"/>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="/Assets/Icons/likes.png" Stretch="Uniform" Opacity="0.85"/>
+                            <TextBlock Grid.Column="1" FontSize="16"  Text="{Binding Likes, StringFormat=N0}" Foreground="#AAFFFFFF" VerticalAlignment="Center" FontFamily="Meiryo UI"/>
+                        </Grid>
+                        <Grid Grid.Row="2" Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="/Assets/Icons/duration.png" Stretch="Uniform" Opacity="0.85"/>
+                            <TextBlock Grid.Column="1" FontSize="16"  Text="{Binding Duration}" Foreground="#AAFFFFFF" VerticalAlignment="Center" FontFamily="Meiryo UI"/>
+                        </Grid>
+                        <Grid Grid.Row="2" Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="/Assets/Icons/rating.png" Stretch="Uniform" Opacity="0.85"/>
+                            <TextBlock Grid.Column="1" FontSize="16"  Text="{Binding Rating, StringFormat=N2}" Foreground="#AAFFFFFF" VerticalAlignment="Center" FontFamily="Meiryo UI"/>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </DataTemplate>
+    </phone:PhoneApplicationPage.Resources>
+
+    <!--Data context is set to sample data above and LayoutRoot contains the root grid where all other page content is placed-->
+
+    <Grid x:Name="LayoutRoot">
+        <phone:Panorama>
+            <phone:Panorama.TitleTemplate>
+                <DataTemplate>
+                    <Grid Height="96">
+                        <!--<Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Source="/larva2.png"/>-->
+                        <Image Source="/Assets/Images/title.png" Stretch="Uniform"></Image>
+                    </Grid>
+                </DataTemplate>
+            </phone:Panorama.TitleTemplate>
+
+            <phone:Panorama.HeaderTemplate>
+                <DataTemplate>
+                    <Grid Margin="0,24,0,-24">
+                        <TextBlock Text="{Binding}" FontSize="48" FontFamily="Georgia"/>
+                    </Grid>
+                </DataTemplate>
+            </phone:Panorama.HeaderTemplate>
+
+            <phone:Panorama.Background>
+                <ImageBrush Stretch="UniformToFill" ImageSource="../Assets/Images/bgBlur_2.jpg" Opacity="0.3"/>
+            </phone:Panorama.Background>
+
+            <!--Panorama item one-->
+            <phone:PanoramaItem Header="Videos">
+                <Grid x:Name="ContentPanel" Margin="12,0,12,0">
+                    <phone:LongListSelector x:Name="ChannelVideos" SelectionChanged="VideosList_SelectionChanged" ItemTemplate="{StaticResource VideoDataTemplate}"/>
+                </Grid>
+
+
+            </phone:PanoramaItem>
+
+            <!--Panorama item two-->
+            <phone:PanoramaItem Header="Characters">
+                <Grid/>
+            </phone:PanoramaItem>
+
+            <phone:PanoramaItem Header="Promotion">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel>
+                        <TextBlock FontFamily="Georgia" Foreground="Gainsboro" FontSize="24" >Trending</TextBlock>
+                    
+                    </StackPanel>
+                    <Grid></Grid>
+                    <Grid></Grid>
+                </StackPanel>
+            </phone:PanoramaItem>
+        </phone:Panorama>
+        <!--<Border Grid.Column="0" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="GoPivotPage">
+                    <Border.Background>
+                        <SolidColorBrush Color="LightCyan"></SolidColorBrush>
+                    </Border.Background>
+                    <TextBlock Padding="0,6,0,0" Foreground="Black" FontSize="24" TextWrapping="Wrap" TextAlignment="Center" Text="Pivot" VerticalAlignment="Center" Height="48"/>
+                </Border>-->
+        <!--<Border Grid.Column="1" Margin="6,0" CornerRadius="6,6,0,0"  MouseEnter="PreviousClick">
+                    <Border.Background>
+                        <SolidColorBrush Color="DarkCyan"></SolidColorBrush>
+                        -->
+        <!--<LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                            <GradientStop Color="#FF083232" Offset="0"/>
+                            <GradientStop Color="#FF188085" Offset="0.5"/>
+                            <GradientStop Color="#FFFFFBDE" Offset="1"/>
+                        </LinearGradientBrush>-->
+        <!--
+                    </Border.Background>
+                    <Image Source="../Assets/Icons/Previous.png"/>
+                </Border>
+                <Border Grid.Column="2" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="PreviousClick">
+                    <Border.Background>
+                        <SolidColorBrush Color="LightCyan"></SolidColorBrush>
+                    </Border.Background>
+                    <TextBlock Padding="0,6,0,0" Foreground="Black" FontSize="24" TextWrapping="Wrap" TextAlignment="Center" Text="1" VerticalAlignment="Center" x:Name="CurrentPageXaml" Height="48"/>
+                </Border>-->
+        <!--<Border Grid.Column="3" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="NextClick">
+                    <Border.Background>
+                        <SolidColorBrush Color="DarkCyan"></SolidColorBrush>
+                    </Border.Background>
+                    <Image Source="../Assets/Icons/Next.png"/>
+                </Border>-->
+
+
+
+        <rma:FeedbackOverlay x:Name="FeedbackOverlay" 
+                             Grid.RowSpan="2" 
+                             FeedbackTo="nvtang.khtn@gmail.com" 
+                             ApplicationName="#Larva Cartoon" 
+                             CompanyName="VTA Media" 
+                             EnableAnimation="False"/>
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar Mode="Default">
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/published.png" Text="date" Click="PublishedClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/viewCount.png" Text="views" Click="ViewCountClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/rating.png" Text="likes" Click="RatingClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/Search.png" Text="search" Click="SearchClick"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="reload"  Click="ReloadClick"/>
+                <shell:ApplicationBarMenuItem Text="rate and review" Click="RateAndReviewClick"/>
+                <shell:ApplicationBarMenuItem Text="feedback"  Click="FeedbackClick"/>
+                <!--<shell:ApplicationBarMenuItem Text="other apps"/>-->
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator x:Name="Indicator" IsVisible="True" IsIndeterminate="False"/>
+    </shell:SystemTray.ProgressIndicator>
+</phone:PhoneApplicationPage>
