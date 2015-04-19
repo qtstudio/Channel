@@ -86,8 +86,8 @@
     </phone:PhoneApplicationPage.Resources>
 
     <!--Data context is set to sample data above and LayoutRoot contains the root grid where all other page content is placed-->
-<<<<<<< HEAD
-    <Grid x:Name="LayoutRoot" DataContext="{StaticResource InterfaceViewModel}">
+
+    <Grid x:Name="LayoutRoot">
         <phone:Panorama>
             <phone:Panorama.TitleTemplate>
                 <DataTemplate>
@@ -104,55 +104,37 @@
             <!--Panorama item one-->
             <phone:PanoramaItem Header="videos">
                 <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+
+                    <Grid.Background>
+                        <ImageBrush Stretch="UniformToFill" ImageSource="../Assets/Images/bgBlur.jpg" Opacity="0.3"/>
+                    </Grid.Background>
                     <phone:LongListSelector x:Name="ChannelVideos" SelectionChanged="VideosList_SelectionChanged" ItemTemplate="{StaticResource VideoDataTemplate}"/>
                 </Grid>
-=======
-    <Grid x:Name="LayoutRoot">
-        <Grid.Background>
-            <ImageBrush Stretch="UniformToFill" ImageSource="../Assets/Images/bgBlur.jpg" Opacity="0.3"/>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid x:Name="TitlePanel" Margin="12" Height="96">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Source="/larva2.png"/>
 
-            <Image Grid.Column="1" Source="/Assets/Images/title.png" Stretch="Uniform"></Image>
-            <!--<TextBlock Grid.Column="1" VerticalAlignment="Center" x:Name="PageTitle" Text="Larva Cartoon" Foreground="White" FontSize="48" FontWeight="ExtraLight" FontFamily="/YoutubeVideoSampleWP80;component/Fonts/Fonts.zip#VNF Cinnamon Cake"/>-->
-
-        </Grid>
->>>>>>> origin/master
 
             </phone:PanoramaItem>
 
-<<<<<<< HEAD
             <!--Panorama item two-->
             <phone:PanoramaItem Header="info">
                 <Grid/>
             </phone:PanoramaItem>
         </phone:Panorama>
-=======
-                <!--<Border Grid.Column="0" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="GoPivotPage">
+        <!--<Border Grid.Column="0" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="GoPivotPage">
                     <Border.Background>
                         <SolidColorBrush Color="LightCyan"></SolidColorBrush>
                     </Border.Background>
                     <TextBlock Padding="0,6,0,0" Foreground="Black" FontSize="24" TextWrapping="Wrap" TextAlignment="Center" Text="Pivot" VerticalAlignment="Center" Height="48"/>
                 </Border>-->
-                <!--<Border Grid.Column="1" Margin="6,0" CornerRadius="6,6,0,0"  MouseEnter="PreviousClick">
+        <!--<Border Grid.Column="1" Margin="6,0" CornerRadius="6,6,0,0"  MouseEnter="PreviousClick">
                     <Border.Background>
                         <SolidColorBrush Color="DarkCyan"></SolidColorBrush>
                         -->
-                <!--<LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+        <!--<LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
                             <GradientStop Color="#FF083232" Offset="0"/>
                             <GradientStop Color="#FF188085" Offset="0.5"/>
                             <GradientStop Color="#FFFFFBDE" Offset="1"/>
                         </LinearGradientBrush>-->
-                <!--
+        <!--
                     </Border.Background>
                     <Image Source="../Assets/Icons/Previous.png"/>
                 </Border>
@@ -162,21 +144,14 @@
                     </Border.Background>
                     <TextBlock Padding="0,6,0,0" Foreground="Black" FontSize="24" TextWrapping="Wrap" TextAlignment="Center" Text="1" VerticalAlignment="Center" x:Name="CurrentPageXaml" Height="48"/>
                 </Border>-->
-                <!--<Border Grid.Column="3" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="NextClick">
+        <!--<Border Grid.Column="3" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="NextClick">
                     <Border.Background>
                         <SolidColorBrush Color="DarkCyan"></SolidColorBrush>
                     </Border.Background>
                     <Image Source="../Assets/Icons/Next.png"/>
                 </Border>-->
-                <Border Grid.Column="4" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="SearchClick">
-                    <Border.Background>
-                        <SolidColorBrush Color="DarkCyan"></SolidColorBrush>
-                    </Border.Background>
-                    <Image Source="../Assets/Icons/Search.png"/>
-                </Border>
-            </Grid>
-        </Grid>
->>>>>>> origin/master
+
+
 
         <rma:FeedbackOverlay x:Name="FeedbackOverlay" 
                              Grid.RowSpan="2" 
