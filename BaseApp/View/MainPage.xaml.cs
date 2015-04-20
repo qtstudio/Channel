@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using System.Xml.Linq;
 using BaseApp.Resources;
 using Coding4Fun.Toolkit.Controls;
+using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using System.Net.Http;
@@ -41,10 +42,16 @@ namespace BaseApp.View
             get { return _configuration.InterfaceViewModel; }
         }
 
+        public AppInfoViewModel AppInfoViewModel
+        {
+            get { return _configuration.AppInfoViewModel; }
+        }
+
         public ColorSchemeViewModel ColorSchemeViewModel
         {
             get { return InterfaceViewModel.ColorSchemeViewModel; }
         }
+
         public List<ChannelViewModel> ChannelViewModel
         {
             get { return _configuration.ChannelViewModel; }
@@ -198,7 +205,7 @@ namespace BaseApp.View
             await GetDataForList();
         }
 
-        public async void SearchClick(object sender, EventArgs e)
+        public void SearchClick(object sender, EventArgs e)
         {
             var input = new InputPrompt();
             input.Completed += input_Completed;
@@ -254,7 +261,7 @@ namespace BaseApp.View
         {
             var emailComposeTask = new EmailComposeTask
             {
-                Subject = "Feedback of Larva",
+                Subject = "Feedback of " + AppInfoViewModel.Name,
                 Body = "",
                 To = "joy.entertainment@outlook.com"
             };
@@ -282,7 +289,7 @@ namespace BaseApp.View
 
             var rating = new ApplicationBarIconButton
             {
-                IconUri = new Uri("/Assets/Icons/likes.png", UriKind.Relative),
+                IconUri = new Uri("/Assets/Icons/rating.png", UriKind.Relative),
                 Text = AppResources.MainPage_AppBar_Likes,
             };
             rating.Click += RatingClick;
@@ -312,6 +319,19 @@ namespace BaseApp.View
             ApplicationBar.MenuItems.Add(reload);
             ApplicationBar.MenuItems.Add(rateAndReview);
             ApplicationBar.MenuItems.Add(feedback);
+        }
+
+        public void ShareClick(object sender, RoutedEventArgs e)
+        {
+            var item =(sender as MenuItem).DataContext as YoutubeVideo;
+            
+            var shareLinkTask = new ShareLinkTask
+            {
+                Title = "Share link from " + AppInfoViewModel.Name + " app",
+                LinkUri = item.YoutubeLink, 
+                Message = "Thank you for using " + AppInfoViewModel.Name + " app!"
+            };
+            shareLinkTask.Show();
         }
     }
 }
