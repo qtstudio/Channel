@@ -24,13 +24,6 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
                 
-                <!--<ListView Grid.Column="0" Grid.Row="0" x:Name="ListView" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}, Path=DataGrid}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Path=Name, Mode=TwoWay}"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>-->
                 <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0.6">
                     <Button Content="Refresh" Background="RoyalBlue"  Foreground="White" BorderThickness="0" Padding="6" Click="BtnRefreshAppInfoGrid" />
                     <Button Content="Export JSON" Background="Green"  Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0"/>
@@ -83,7 +76,7 @@
                     </StackPanel>
 
                     <GroupBox Header="Channels">
-
+                        
                     </GroupBox>
                     <GroupBox Header="Tags"/>
                     <GroupBox Header="Characters"/>
@@ -95,41 +88,65 @@
                     <Button Content="Create" Background="RoyalBlue" Foreground="White" BorderThickness="0" Padding="6" Click="BtnCreateApp" />
                     <Button Content="Update" Background="RoyalBlue" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0" Click="BtnUpdateApp"/>
                     <Button Content="Export JSON" Background="Green" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0" />
-                    <Button Content="Batch Build" Background="Teal" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0"/>
+                    <Button Content="Build" Background="Teal" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0"/>
                 </StackPanel>
             </Grid>
         </TabItem>
         <TabItem Header="Channel">
-            <Grid Background="#FFE5E5E5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Column="0" Grid.Row="0" Margin="6">
+                <ListBox x:Name="ChannelTabListBox" ItemsSource="{Binding}" SelectionChanged="ListBox_OnSelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Path=Name}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0.6">
+                    <Button Content="Refresh" Background="RoyalBlue"  Foreground="White" BorderThickness="0" Padding="6" Click="BtnRefreshAppInfoGrid" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" >
+                    <Grid Margin="6">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="5*"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" HorizontalAlignment="Right">Channel Id</Label>
                         <TextBox Grid.Column="1"></TextBox>
                     </Grid>
-                    <Grid Grid.Column="1" Grid.Row="0" Margin="6">
+                    <Grid Margin="6">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="5*"/>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" HorizontalAlignment="Right">Token</Label>
                         <TextBox Grid.Column="1"></TextBox>
                     </Grid>
-                </Grid>
+                    <Grid Margin="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" HorizontalAlignment="Right">Type Data</Label>
+                        <TextBox Grid.Column="1"></TextBox>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="6">
+                        <Button Content="Create" Background="RoyalBlue" Foreground="White" BorderThickness="0" Padding="6" Click="BtnCreateApp" />
+                        <Button Content="Update" Background="RoyalBlue" Foreground="White" BorderThickness="0" Padding="6" Margin="6,0,0,0" Click="BtnUpdateApp"/>
+                    </StackPanel>
+                </StackPanel>
             </Grid>
         </TabItem>
         <TabItem Header="Character">
