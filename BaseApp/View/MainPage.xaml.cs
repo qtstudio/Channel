@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Xml.Linq;
+using BaseApp.Resources;
 using Coding4Fun.Toolkit.Controls;
+using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -21,19 +23,18 @@ namespace BaseApp.View
         private readonly Configuration _configuration  = ((App)Application.Current).Configuration; 
         private readonly DetectorLongList _detectorLongList;
 
-        private int _maxResult = 10;
+        private const int _maxResult = 20;
         private string _orderBy = "published";
         private int _index = 1;
         private string _query = "";
-
+        private int _totalResults;
+        private int _totalPages = 1;
+        private int _crrPage = 1;
         public MainPage()
         {
             InitializeComponent();
+            BuildApplicationBar();
             FeedbackOverlay.VisibilityChanged += FeedbackOverlay_VisibilityChanged;
-            
-            _detectorLongList = new DetectorLongList();
-            _detectorLongList.Compression += GetMoreVideos;
-            _detectorLongList.Bind(ChannelVideos);
         }
         public InterfaceViewModel InterfaceViewModel
         {
@@ -47,15 +48,6 @@ namespace BaseApp.View
         public List<ChannelViewModel> ChannelViewModel
         {
             get { return _configuration.ChannelViewModel; }
-        }
-
-        private async void GetMoreVideos(object sender, CompressionEventArgs compressionEventArgs)
-        {
-            if (compressionEventArgs.Type == CompressionType.Bottom)
-            {
-                _index += _maxResult;
-                await GetDataForList("Loading more videos...");
-            }
         }
 
         void FeedbackOverlay_VisibilityChanged(object sender, EventArgs e)
@@ -74,9 +66,8 @@ namespace BaseApp.View
                         ChannelVideos.ItemsSource.Clear();
                     }
 
-                    await GetDataForList("Loading videos...");
-                    Indicator.Text = "";
-                    Indicator.IsIndeterminate = false;
+                    await GetDataForList();
+                    _totalPages = (int)Math.Ceiling((double)_totalResults / _maxResult);
                 }
                 else
                 {
@@ -91,9 +82,9 @@ namespace BaseApp.View
             base.OnNavigatedTo(e);
         }
 
-        private async Task GetDataForList(string contentLoading)
+        private async Task GetDataForList()
         {
-            Indicator.Text = contentLoading;
+            Indicator.Text = AppResources.MainPage_CS_LoadingVideos;
             Indicator.IsIndeterminate = true;
 
             var channelInfo = ChannelViewModel[0];
@@ -103,18 +94,14 @@ namespace BaseApp.View
                     GetYoutubeChannel("http://gdata.youtube.com/feeds/api/users/" + channelInfo.ChannelId +
                                       "/uploads?alt=" + channelInfo.TypeData + "&v=2&orderby=" + _orderBy + "&start-index=" + _index +
                                       "&max-results=" + _maxResult + (string.IsNullOrEmpty(_query) ? "" : ("&q=" + _query)));
-            if (ChannelVideos.ItemsSource == null)
-                ChannelVideos.ItemsSource = channelVideos;
-            else
-            {
-                _detectorLongList.Unbind();
-                foreach (var item in channelVideos)
-                {
-                    ChannelVideos.ItemsSource.Add(item);
-                }
-                _detectorLongList.Bind(ChannelVideos);
-            }
-            
+            if (ChannelVideos.ItemsSource != null)
+                ChannelVideos.ItemsSource.Clear();
+            ChannelVideos.ItemsSource = channelVideos;
+
+            CurrentPageXaml.Text = _crrPage.ToString();
+
+            Indicator.Text = "";
+            Indicator.IsIndeterminate = false;
         }
 
         private async Task<List<YoutubeVideo>> GetYoutubeChannel(string url)
@@ -126,7 +113,7 @@ namespace BaseApp.View
 
                 //var atomns = XNamespace.Get("http://www.w3.org/2005/Atom");
                 var yt = XNamespace.Get("http://gdata.youtube.com/schemas/2007");
-                //var openSearch = XNamespace.Get("http://a9.com/-/spec/opensearch/1.1/");
+                var openSearch = XNamespace.Get("http://a9.com/-/spec/opensearch/1.1/");
                 var media = XNamespace.Get("http://search.yahoo.com/mrss/");
                 var gd = XNamespace.Get("http://schemas.google.com/g/2005");
 
@@ -134,7 +121,7 @@ namespace BaseApp.View
                 var channel = xml.Element("channel");
                 var items = channel.Elements("item");
                 var videosList = new List<YoutubeVideo>();
-                //TotalResults = int.Parse(channel.Element(openSearch + "totalResults").Value);
+                _totalResults = int.Parse(channel.Element(openSearch + "totalResults").Value);
                 foreach (var item in items)
                 {
                     var mediaGroup = item.Element(media + "group");
@@ -182,35 +169,34 @@ namespace BaseApp.View
                 NavigationService.Navigate(new Uri("/View/VideoPage.xaml?videoId=" + video.Id, UriKind.Relative));
         }
 
-
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
         {
             Application.Current.Terminate();
             base.OnBackKeyPress(e);
         }
 
-        //public async void NextClick(object sender, EventArgs e)
-        //{
-        //    _configuration.Index += _configuration.MaxResult;
-        //    if (_configuration.Index >= TotalResults)
-        //    {
-        //        _configuration.Index -= _configuration.MaxResult;
-        //        return;
-        //    }
-        //    CurrentPage = _configuration.Index / _configuration.MaxResult + 1;
-        //    await GetDataForList();
-        //}
-        //public async void PreviousClick(object sender, EventArgs e)
-        //{
-        //    _configuration.Index -= _configuration.MaxResult;
-        //    if (_configuration.Index < 1)
-        //    {
-        //        _configuration.Index += _configuration.MaxResult;
-        //        return;
-        //    }
-        //    CurrentPage = _configuration.Index / _configuration.MaxResult + 1;
-        //    await GetDataForList();
-        //}
+        public async void NextClick(object sender, EventArgs e)
+        {
+            _index += _maxResult;
+            if (_index >= _totalResults)
+            {
+                _index -= _maxResult;
+                return;
+            }
+            _crrPage = _index / _maxResult + 1;
+            await GetDataForList();
+        }
+        public async void PreviousClick(object sender, EventArgs e)
+        {
+            _index -= _maxResult;
+            if (_index < 1)
+            {
+                _index += _maxResult;
+                return;
+            }
+            _crrPage = _index / _maxResult + 1;
+            await GetDataForList();
+        }
 
         public async void SearchClick(object sender, EventArgs e)
         {
@@ -223,28 +209,34 @@ namespace BaseApp.View
 
         private async void input_Completed(object sender, PopUpEventArgs<string, PopUpResult> e)
         {
-            //_configuration.Index = 1;
-            //CurrentPage = _configuration.Index / _configuration.MaxResult + 1;
+            _index = 1;
+            _crrPage = _index / _maxResult + 1;
             _query = HttpUtility.UrlEncode(e.Result);
-            await GetDataForList("Searching...");
+            await GetDataForList();
         }
 
         public async void PublishedClick(object sender, EventArgs e)
         {
+            _index = 1;
+            _crrPage = _index / _maxResult + 1;
             _orderBy = OrderByType.published.ToString();
-            await GetDataForList("Loading videos...");
+            await GetDataForList();
         }
 
         public async void RatingClick(object sender, EventArgs e)
         {
+            _index = 1;
+            _crrPage = _index / _maxResult + 1;
             _orderBy = OrderByType.rating.ToString();
-            await GetDataForList("Loading videos...");
+            await GetDataForList();
         }
 
         public async void ViewCountClick(object sender, EventArgs e)
         {
+            _index = 1;
+            _crrPage = _index / _maxResult + 1;
             _orderBy = OrderByType.viewCount.ToString();
-            await GetDataForList("Loading videos...");
+            await GetDataForList();
         }
 
         public void RateAndReviewClick(object sender, EventArgs e)
@@ -255,7 +247,7 @@ namespace BaseApp.View
 
         public async void ReloadClick(object sender, EventArgs e)
         {
-            await GetDataForList("Loading videos...");
+            await GetDataForList();
         }
 
         public void FeedbackClick(object sender, EventArgs e)
@@ -266,8 +258,60 @@ namespace BaseApp.View
                 Body = "",
                 To = "joy.entertainment@outlook.com"
             };
-
             emailComposeTask.Show();
+        }
+
+        private void BuildApplicationBar()
+        {
+            ApplicationBar = new ApplicationBar();
+
+            var date = new ApplicationBarIconButton
+            {
+                IconUri = new Uri("/Assets/Icons/published.png", UriKind.Relative),
+                Text = AppResources.MainPage_AppBar_Date,
+            };
+            date.Click += PublishedClick;
+
+            var viewCount = new ApplicationBarIconButton
+            {
+                IconUri = new Uri("/Assets/Icons/viewCount.png", UriKind.Relative),
+                Text = AppResources.MainPage_AppBar_Views,
+            };
+            viewCount.Click += ViewCountClick;
+
+
+            var rating = new ApplicationBarIconButton
+            {
+                IconUri = new Uri("/Assets/Icons/likes.png", UriKind.Relative),
+                Text = AppResources.MainPage_AppBar_Likes,
+            };
+            rating.Click += RatingClick;
+
+            var reload = new ApplicationBarMenuItem
+            {
+                Text = AppResources.MainPage_AppMenu_Reload
+            };
+            reload.Click += ReloadClick;
+
+            var rateAndReview = new ApplicationBarMenuItem
+            {
+                Text = AppResources.MainPage_AppMenu_RateReview
+            };
+            rateAndReview.Click += RateAndReviewClick;
+
+            var feedback = new ApplicationBarMenuItem
+            {
+                Text = AppResources.MainPage_AppMenu_Feedback
+            };
+            feedback.Click += FeedbackClick;
+
+            ApplicationBar.Buttons.Add(date);
+            ApplicationBar.Buttons.Add(viewCount);
+            ApplicationBar.Buttons.Add(rating);
+
+            ApplicationBar.MenuItems.Add(reload);
+            ApplicationBar.MenuItems.Add(rateAndReview);
+            ApplicationBar.MenuItems.Add(feedback);
         }
     }
 }
