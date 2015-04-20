@@ -106,6 +106,15 @@ namespace BaseApp.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to more apps.
+        /// </summary>
+        public static string MainPage_AppMenu_MoreApps {
+            get {
+                return ResourceManager.GetString("MainPage_AppMenu_MoreApps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to rate and review.
         /// </summary>
         public static string MainPage_AppMenu_RateReview {

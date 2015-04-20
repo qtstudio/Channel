@@ -4,12 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:local="clr-namespace:BaseApp"
-    xmlns:model="clr-namespace:BaseApp.Model">
+    xmlns:model="clr-namespace:BaseApp.Model"
+    xmlns:viewModel="clr-namespace:BaseApp.Model.ViewModel">
 
     <!--Application Resources-->
     <Application.Resources>
         <local:LocalizedStrings x:Key="LocalizedStrings"/>
-        <model:PromotionViewModel x:Key="PromotionViewModel"/>
+        <viewModel:PromotionViewModel x:Key="PromotionViewModel"/>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

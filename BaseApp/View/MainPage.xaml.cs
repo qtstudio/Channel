@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Xml.Linq;
+using BaseApp.Model.ViewModel;
 using BaseApp.Resources;
 using Coding4Fun.Toolkit.Controls;
 using Microsoft.Phone.Controls;
@@ -268,6 +269,15 @@ namespace BaseApp.View
             emailComposeTask.Show();
         }
 
+        public void MoreAppsClick(object sender, EventArgs e)
+        {
+            var marketplaceSearchTask = new MarketplaceSearchTask
+            {
+                SearchTerms = AppInfoViewModel.PublisherName
+            };
+            marketplaceSearchTask.Show();
+        }
+
         private void BuildApplicationBar()
         {
             ApplicationBar = new ApplicationBar();
@@ -285,7 +295,6 @@ namespace BaseApp.View
                 Text = AppResources.MainPage_AppBar_Views,
             };
             viewCount.Click += ViewCountClick;
-
 
             var rating = new ApplicationBarIconButton
             {
@@ -312,6 +321,12 @@ namespace BaseApp.View
             };
             feedback.Click += FeedbackClick;
 
+            var moreApps = new ApplicationBarMenuItem
+            {
+                Text = AppResources.MainPage_AppMenu_MoreApps
+            };
+            moreApps.Click += MoreAppsClick;
+
             ApplicationBar.Buttons.Add(date);
             ApplicationBar.Buttons.Add(viewCount);
             ApplicationBar.Buttons.Add(rating);
@@ -319,6 +334,7 @@ namespace BaseApp.View
             ApplicationBar.MenuItems.Add(reload);
             ApplicationBar.MenuItems.Add(rateAndReview);
             ApplicationBar.MenuItems.Add(feedback);
+            ApplicationBar.MenuItems.Add(moreApps);
         }
 
         public void ShareClick(object sender, RoutedEventArgs e)

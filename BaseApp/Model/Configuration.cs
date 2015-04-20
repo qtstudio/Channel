@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using BaseApp.Model.Parameter;
+using BaseApp.Model.ViewModel;
 using BaseApp.Utilities;
 
 namespace BaseApp.Model
@@ -37,7 +39,8 @@ namespace BaseApp.Model
                 AppInfoViewModel = new AppInfoViewModel
                 {
                     Name = param.AppName,
-                    Description = param.Description
+                    Description = param.Description,
+                    PublisherName = param.
                 },
                 ChannelViewModel = param.Channel.Select(o => new ChannelViewModel
                 {
@@ -57,29 +60,5 @@ namespace BaseApp.Model
                 }
             };
         }
-    }
-
-    class ConfigurationParam
-    {
-        public string AppName { get; set; }
-        public string Description { get; set; }
-        public List<ChannelParam> Channel { get; set; }
-        public ColorSchemeParam ColorScheme { get; set; }
-    }
-
-    class ColorSchemeParam
-    {
-        public string DarkColor { get; set; }
-        public string LightColor { get; set; }
-        public string DarkTextColor { get; set; }
-        public string LightTextColor { get; set; }
-
-    }
-    class ChannelParam
-    {
-        public string ChannelId { get; set; }
-        public string TypeData { get; set; }
-        public string Token { get; set; }
-
     }
 }

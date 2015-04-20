@@ -132,6 +132,9 @@
   <data name="MainPage_AppMenu_Feedback" xml:space="preserve">
     <value>feedback</value>
   </data>
+  <data name="MainPage_AppMenu_MoreApps" xml:space="preserve">
+    <value>more apps</value>
+  </data>
   <data name="MainPage_AppMenu_RateReview" xml:space="preserve">
     <value>rate and review</value>
   </data>

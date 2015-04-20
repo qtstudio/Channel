@@ -1,6 +1,7 @@
 ﻿{
     "AppName": "Larva",
     "Description": "This is Larva app",
+    "PublisherName": "QTStudio",
     "Channel": [
         {
             "ChannelId": "JackyPhanChanel",

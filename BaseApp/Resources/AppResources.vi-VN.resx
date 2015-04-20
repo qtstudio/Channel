@@ -148,4 +148,7 @@
   <data name="MainPage_CS_LoadingVideos" xml:space="preserve">
     <value>danh sách videos...</value>
   </data>
+  <data name="MainPage_AppMenu_MoreApps" xml:space="preserve">
+    <value>ứng dụng khác</value>
+  </data>
 </root>
