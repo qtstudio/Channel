@@ -117,37 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MainPage_AppBar_Date" xml:space="preserve">
-    <value>date</value>
-  </data>
-  <data name="MainPage_AppBar_Likes" xml:space="preserve">
-    <value>rating</value>
-  </data>
-  <data name="MainPage_AppBar_Search" xml:space="preserve">
-    <value>search</value>
-  </data>
-  <data name="MainPage_AppBar_Views" xml:space="preserve">
-    <value>views</value>
-  </data>
-  <data name="MainPage_AppMenu_Feedback" xml:space="preserve">
-    <value>feedback</value>
-  </data>
-  <data name="MainPage_AppMenu_MoreApps" xml:space="preserve">
-    <value>more apps</value>
-  </data>
-  <data name="MainPage_AppMenu_RateReview" xml:space="preserve">
-    <value>rate and review</value>
-  </data>
-  <data name="MainPage_AppMenu_Reload" xml:space="preserve">
-    <value>reload</value>
-  </data>
-  <data name="MainPage_CS_LoadingVideos" xml:space="preserve">
-    <value>Loading videos...</value>
+  <data name="ResourceLanguage" xml:space="preserve">
+    <value>vi-VN</value>
+    <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
   </data>
   <data name="ResourceFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
   </data>
-  <data name="ResourceLanguage" xml:space="preserve">
-    <value>en-US</value>
+  <data name="MainPage_AppBar_Date" xml:space="preserve">
+    <value>theo ngày</value>
+  </data>
+  <data name="MainPage_AppBar_Likes" xml:space="preserve">
+    <value>đánh giá</value>
+  </data>
+  <data name="MainPage_AppBar_Search" xml:space="preserve">
+    <value>tìm kiếm</value>
+  </data>
+  <data name="MainPage_AppBar_Views" xml:space="preserve">
+    <value>lượt xem</value>
+  </data>
+  <data name="MainPage_AppMenu_Feedback" xml:space="preserve">
+    <value>phản hồi</value>
+  </data>
+  <data name="MainPage_AppMenu_RateReview" xml:space="preserve">
+    <value>đánh giá</value>
+  </data>
+  <data name="MainPage_AppMenu_Reload" xml:space="preserve">
+    <value>tải lại videos</value>
+  </data>
+  <data name="MainPage_CS_LoadingVideos" xml:space="preserve">
+    <value>danh sách videos...</value>
+  </data>
+  <data name="MainPage_AppMenu_MoreApps" xml:space="preserve">
+    <value>ứng dụng khác</value>
   </data>
 </root>

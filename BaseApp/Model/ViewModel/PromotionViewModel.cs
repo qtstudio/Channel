@@ -1,4 +1,4 @@
-﻿namespace BaseApp.Model
+﻿namespace BaseApp.Model.ViewModel
 {
      public class PromotionViewModel
     {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Windows.UI;
 
-namespace BaseApp.Model
+namespace BaseApp.Model.ViewModel
 {
     public class ColorSchemeViewModel : INotifyPropertyChanged
     {

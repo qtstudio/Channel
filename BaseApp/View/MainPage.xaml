@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:rma="clr-namespace:RateMyApp.Controls;assembly=RateMyApp"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -80,6 +81,12 @@
                         </Grid>
                     </Grid>
                 </Border>
+
+                <toolkit:ContextMenuService.ContextMenu>
+                    <toolkit:ContextMenu BorderThickness="0" BorderBrush="White">
+                        <toolkit:MenuItem Header="share" Click="ShareClick"/>
+                    </toolkit:ContextMenu>
+                </toolkit:ContextMenuService.ContextMenu>
             </Grid>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
@@ -117,9 +124,21 @@
             <phone:PanoramaItem Header="Videos">
                 <Grid x:Name="ContentPanel" Margin="12,0,12,0">
                     <phone:LongListSelector x:Name="ChannelVideos" SelectionChanged="VideosList_SelectionChanged" ItemTemplate="{StaticResource VideoDataTemplate}"/>
+                    <Grid VerticalAlignment="Bottom" Height="48">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Grid.Column="0" Source="../Assets/Icons/Previous.png" MouseEnter="PreviousClick"/>
+                        <TextBlock Grid.Column="1" Padding="0,6,0,0" Foreground="White" FontSize="24" FontWeight="Light" TextWrapping="Wrap" TextAlignment="Center" Text="1" VerticalAlignment="Center" x:Name="CurrentPageXaml" Height="48"/>
+                        <Image Grid.Column="2" Source="../Assets/Icons/Next.png" MouseEnter="NextClick"/>
+                        <Image Grid.Column="3" Source="../Assets/Icons/Search.png" MouseEnter="SearchClick"/>
+                        
+                    </Grid>
                 </Grid>
-
-
             </phone:PanoramaItem>
 
             <!--Panorama item two-->
@@ -131,46 +150,13 @@
                 <StackPanel Orientation="Vertical">
                     <StackPanel>
                         <TextBlock FontFamily="Georgia" Foreground="Gainsboro" FontSize="24" >Trending</TextBlock>
-                    
+
                     </StackPanel>
                     <Grid></Grid>
                     <Grid></Grid>
                 </StackPanel>
             </phone:PanoramaItem>
         </phone:Panorama>
-        <!--<Border Grid.Column="0" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="GoPivotPage">
-                    <Border.Background>
-                        <SolidColorBrush Color="LightCyan"></SolidColorBrush>
-                    </Border.Background>
-                    <TextBlock Padding="0,6,0,0" Foreground="Black" FontSize="24" TextWrapping="Wrap" TextAlignment="Center" Text="Pivot" VerticalAlignment="Center" Height="48"/>
-                </Border>-->
-        <!--<Border Grid.Column="1" Margin="6,0" CornerRadius="6,6,0,0"  MouseEnter="PreviousClick">
-                    <Border.Background>
-                        <SolidColorBrush Color="DarkCyan"></SolidColorBrush>
-                        -->
-        <!--<LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
-                            <GradientStop Color="#FF083232" Offset="0"/>
-                            <GradientStop Color="#FF188085" Offset="0.5"/>
-                            <GradientStop Color="#FFFFFBDE" Offset="1"/>
-                        </LinearGradientBrush>-->
-        <!--
-                    </Border.Background>
-                    <Image Source="../Assets/Icons/Previous.png"/>
-                </Border>
-                <Border Grid.Column="2" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="PreviousClick">
-                    <Border.Background>
-                        <SolidColorBrush Color="LightCyan"></SolidColorBrush>
-                    </Border.Background>
-                    <TextBlock Padding="0,6,0,0" Foreground="Black" FontSize="24" TextWrapping="Wrap" TextAlignment="Center" Text="1" VerticalAlignment="Center" x:Name="CurrentPageXaml" Height="48"/>
-                </Border>-->
-        <!--<Border Grid.Column="3" Margin="6,0" CornerRadius="6,6,0,0" MouseEnter="NextClick">
-                    <Border.Background>
-                        <SolidColorBrush Color="DarkCyan"></SolidColorBrush>
-                    </Border.Background>
-                    <Image Source="../Assets/Icons/Next.png"/>
-                </Border>-->
-
-
 
         <rma:FeedbackOverlay x:Name="FeedbackOverlay" 
                              Grid.RowSpan="2" 
@@ -180,20 +166,6 @@
                              EnableAnimation="False"/>
     </Grid>
 
-    <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar Mode="Default">
-            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/published.png" Text="date" Click="PublishedClick"/>
-            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/viewCount.png" Text="views" Click="ViewCountClick"/>
-            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/rating.png" Text="likes" Click="RatingClick"/>
-            <shell:ApplicationBarIconButton IconUri="/Assets/Icons/Search.png" Text="search" Click="SearchClick"/>
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="reload"  Click="ReloadClick"/>
-                <shell:ApplicationBarMenuItem Text="rate and review" Click="RateAndReviewClick"/>
-                <shell:ApplicationBarMenuItem Text="feedback"  Click="FeedbackClick"/>
-                <!--<shell:ApplicationBarMenuItem Text="other apps"/>-->
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator x:Name="Indicator" IsVisible="True" IsIndeterminate="False"/>
     </shell:SystemTray.ProgressIndicator>

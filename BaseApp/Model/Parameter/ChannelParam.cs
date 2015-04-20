@@ -1,6 +1,6 @@
-﻿namespace BaseApp.Model
+namespace BaseApp.Model.Parameter
 {
-    public class ChannelViewModel
+    class ChannelParam
     {
         public string ChannelId { get; set; }
         public string TypeData { get; set; }
